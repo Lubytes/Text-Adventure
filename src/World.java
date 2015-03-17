@@ -228,6 +228,7 @@ public class World {
 	//test this map
 	public static void main (String [] args)throws IOException{
 
+		//how to build the map and find the start and finish tiles
 		World w = new World();
 		w.buildMap();
 		int startRow = w.getStartRow();
@@ -238,6 +239,25 @@ public class World {
 		System.out.println(finishRow + ", " + finishCol );
 		System.out.println("\n" + w.getMap());
 		System.out.println(w.getTile(3, 5));
+		
+		//how to look at what's in tiles
+		System.out.println("You want to look around? Let's say you're on tile 3,5");
+		System.out.println("Above: " + w.getTile(2, 5).getType());
+		System.out.println("Right: " + w.getTile(3, 6).getType());
+		System.out.println("Left: " + w.getTile(3, 4).getType());
+		System.out.println("Below: " + w.getTile(4, 5).getType());
+		
+		//you can use addition and subtraction to go from tile to tile
+		//you can use the tile type to do stuff
+		for (int i=0; i<6; i++)
+		{
+			if (w.getTile(i, 5).getType().equals("enemy_tiger"))
+			{
+				System.out.println("Oh no, a tiger!");
+			} else {
+				System.out.println("Step");
+			}
+		}
 
 	}
 }
