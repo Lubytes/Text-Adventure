@@ -4,7 +4,8 @@
 public class Tile {
 	private String type;
 	private Obstacle ob;
-	private Enemy tiger;
+	private Enemy enemy;
+	private Item item;
 	
 	//constructor
 	public Tile()
@@ -21,13 +22,14 @@ public class Tile {
 	
 	public void setEnemy(String s)
 	{
-		tiger = new Enemy();
+		enemy = new Enemy();
 		type = s;
 	}
 	
-	public void setItem()
+	public void setItem(String s)
 	{
-		type = "weapon";
+		item = new Item();
+		type = s;
 	}
 	
 	public void setType(String s)

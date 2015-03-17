@@ -1,5 +1,5 @@
 water,water,water,water,water,water,water,water
-water,water,water,water,empty,empty,water,water
+water,water,water,water,start,empty,water,water
 water,water,water,empty,empty,empty,water,water
 water,water,water,empty,empty,empty,water,water
 water,water,empty,empty,empty,wild_enemy,empty,water
@@ -16,7 +16,7 @@ water,empty,water,empty,empty,empty,empty,water
 water,empty,water,water,empty,wild_enemy,empty,water
 water,empty,empty,empty,empty,empty,empty,water
 water,empty,empty,empty,empty,empty,empty,water
-water,empty,empty,empty,empty,empty,empty,water
+water,finish,empty,empty,empty,empty,empty,water
 water,empty,empty,wild_enemy,empty,empty,empty,water
 water,empty,empty,empty,empty,empty,water,water
 water,water,empty,empty,empty,empty,water,water
