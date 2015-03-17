@@ -60,9 +60,19 @@ public class World {
 					} else if (array[col].equals("enemy_tiger")) {
 						//enemy tile
 						tile.setEnemy("enemy_tiger");
+					} else if (array[col].equals("wild_enemy")) {
+						Random rand = new Random(); //random number
+						int n = rand.nextInt(1);
+						//random empty or enemy
+						if (n == 0)
+						{
+							tile.setEnemy("enemy_tiger");
+						} else {
+							tile.setType("empty");
+						}
 					} else{
 						//anything else is gonna be empty
-						tile.setType("Emtpy Tile");
+						tile.setType("empty");
 					}
 					currentLine.add(tile); //now add the tile
 				}
