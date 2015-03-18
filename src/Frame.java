@@ -3,7 +3,9 @@
  */
 import javax.swing.*;
 import java.awt.*;
-public class Frame extends JFrame {
+import java.awt.event.*;
+import java.io.IOException;
+public class Frame extends JFrame implements ActionListener {
 	
 	//private JPanel panel; //the panel to hold stuff
 	private JButton buttonUp; //up button
@@ -11,6 +13,7 @@ public class Frame extends JFrame {
 	private JButton buttonRight; //up button
 	private JButton buttonLeft; //up button
 	private JButton buttonUse; //Use Item button
+	private JButton buttonStart; //Start button
 	private JTextArea labelMessage; //holds game text
 	private String message = "This is the space where the game will say messages.\n" +
 			" It will relay what is happening in the game.\n" +
@@ -20,9 +23,11 @@ public class Frame extends JFrame {
 	
 	//for background image
 	private JLabel background;
+	private Game game; //make a game
 	
-	public Frame()
+	public Frame() throws IOException
 	{
+		
 		//panel = new JPanel();
 		//text message
 		labelMessage = new JTextArea(message);
@@ -36,6 +41,7 @@ public class Frame extends JFrame {
 		buttonLeft = new JButton("Left");
 		buttonDown = new JButton("Down");
 		buttonUse = new JButton("Use Item");
+		buttonStart = new JButton("New Game");
 		
 		//setting a background image
 		//got this here http://java-demos.blogspot.ca/2012/09/setting-background-image-in-jframe.html
@@ -46,6 +52,7 @@ public class Frame extends JFrame {
 		
 		
 		//add all this
+		background.add(buttonStart);
 		background.add(labelMessage);
 		background.add(buttonUp);
 		background.add(buttonRight);
@@ -67,10 +74,66 @@ public class Frame extends JFrame {
 		setSize(500,400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
+		
+		//add action listeners
+		buttonUp.addActionListener(this);
+		buttonRight.addActionListener(this);
+		buttonLeft.addActionListener(this);
+		buttonDown.addActionListener(this);
+		buttonUse.addActionListener(this);
+		buttonStart.addActionListener(this);
+		
+		//start a new game
+		game = new Game();
 	}
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 	{
 		Frame myWindow = new Frame();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == buttonStart) //pressing the "New Game" button
+		{
+			//make a game
+			try {
+				game = new Game();
+				message = game.getStatus();
+				labelMessage.setText(message);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		if (e.getSource() == buttonUp) //pressing the up button
+		{
+			game.moveUp(); //move up on the map
+			message = game.getStatus(); //print the status in the message
+			labelMessage.setText(message);
+			System.out.println("Move Up");
+		}
+		if (e.getSource() == buttonDown) //pressing the down button
+		{
+			game.moveDown(); //move down on the map
+			message = game.getStatus();
+			labelMessage.setText(message);
+			System.out.println("Move Down");
+		}
+		if (e.getSource() == buttonRight) //pressing the right button
+		{
+			game.moveRight();
+			message = game.getStatus();
+			labelMessage.setText(message);
+			System.out.println("Move Right");
+		}
+		if (e.getSource() == buttonLeft) //pressing the left button
+		{
+			game.moveLeft();
+			message = game.getStatus();
+			labelMessage.setText(message);
+			System.out.println("Move Left");
+		}
+		
 	}
 }
