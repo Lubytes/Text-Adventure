@@ -15,11 +15,13 @@ public class Frame extends JFrame implements ActionListener {
 	private JButton buttonUse; //Use Item button
 	private JButton buttonStart; //Start button
 	private JTextArea labelMessage; //holds game text
+	private JLabel labelHP; //displays the person's hp
+	private int hp = 100; //holds the person's hit points. we should put this in the Person class.
 	private String message = "This is the space where the game will say messages.\n" +
 			" It will relay what is happening in the game.\n" +
 			" We are going to need a lot of strings."; //text message from the game
 	private String[] items = {"stick", "health", "thing", "item"}; //array to hold items
-	private JComboBox itemList = new JComboBox(items); //holds the items in a combo box
+	private JComboBox itemList; //holds the items in a combo box
 	
 	//for background image
 	private JLabel background;
@@ -34,6 +36,12 @@ public class Frame extends JFrame implements ActionListener {
 		labelMessage.setSize(490, 100);
 		labelMessage.setEditable(false);
 		labelMessage.setOpaque(false);
+		
+		//player hit points
+		labelHP = new JLabel("HP: " + hp);
+		
+		//populate item list
+		itemList = new JComboBox(items);
 		
 		//buttons
 		buttonUp = new JButton("Up");
@@ -64,6 +72,7 @@ public class Frame extends JFrame implements ActionListener {
 		itemList.setSelectedIndex(0);
 		background.add(itemList);
 		background.add(buttonUse);
+		background.add(labelHP);
 		
 		
 		
@@ -82,7 +91,8 @@ public class Frame extends JFrame implements ActionListener {
 		buttonDown.addActionListener(this);
 		buttonUse.addActionListener(this);
 		buttonStart.addActionListener(this);
-		
+		itemList.addActionListener(this);
+	
 		//start a new game
 		game = new Game();
 	}
@@ -92,6 +102,7 @@ public class Frame extends JFrame implements ActionListener {
 		Frame myWindow = new Frame();
 	}
 
+	//All the button pressing actions!
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == buttonStart) //pressing the "New Game" button
@@ -101,6 +112,8 @@ public class Frame extends JFrame implements ActionListener {
 				game = new Game();
 				message = game.getStatus();
 				labelMessage.setText(message);
+				//resets the item list
+				itemList.setModel(new DefaultComboBoxModel(items));
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -133,6 +146,11 @@ public class Frame extends JFrame implements ActionListener {
 			message = game.getStatus();
 			labelMessage.setText(message);
 			System.out.println("Move Left");
+		}
+		if (e.getSource() == buttonUse) //use an item in the list
+		{
+			int item = itemList.getSelectedIndex(); //get the selected item
+			itemList.removeItemAt(item); //remove the used item
 		}
 		
 	}
