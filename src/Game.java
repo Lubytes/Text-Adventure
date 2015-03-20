@@ -72,7 +72,7 @@ public class Game {
 	
 	public void moveDown()
 	{
-		if (yPos < world.getMap().size())
+		if (yPos < world.getMap().size()-1)
 		{
 			yPos++;
 			current = world.getTile(yPos, xPos); //sets the position
@@ -86,7 +86,7 @@ public class Game {
 	
 	public void moveRight()
 	{
-		if (xPos < world.getMap().get(yPos).size())
+		if (xPos < world.getMap().get(yPos).size()-1)
 		{
 			xPos++;
 			current = world.getTile(yPos, xPos); //sets the position
