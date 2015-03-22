@@ -112,5 +112,11 @@ public class Game {
 		}
 	}
 	
+	public void useItem(String name)
+	{
+		//uses an item from the person somehow?
+		System.out.println(name); //TESTING
+	}
+	
 	
 }

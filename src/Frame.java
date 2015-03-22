@@ -8,6 +8,9 @@ import java.io.IOException;
 public class Frame extends JFrame implements ActionListener {
 	
 	//private JPanel panel; //the panel to hold stuff
+	private JPanel topPanel; //panel with text message and HP
+	private JPanel mapPanel; //holds the directional buttons
+	private JPanel itemPanel; //holds the items
 	private JButton buttonUp; //up button
 	private JButton buttonDown; //up button
 	private JButton buttonRight; //up button
@@ -33,7 +36,7 @@ public class Frame extends JFrame implements ActionListener {
 		//panel = new JPanel();
 		//text message
 		labelMessage = new JTextArea(message);
-		labelMessage.setSize(490, 100);
+		labelMessage.setPreferredSize(new Dimension(400, 100)); //sizes the textbox
 		labelMessage.setEditable(false);
 		labelMessage.setOpaque(false);
 		
@@ -53,30 +56,60 @@ public class Frame extends JFrame implements ActionListener {
 		
 		//setting a background image
 		//got this here http://java-demos.blogspot.ca/2012/09/setting-background-image-in-jframe.html
-		setLayout(new BorderLayout());
+		//setLayout(new BorderLayout());
 		background = new JLabel(new ImageIcon("img/bg.jpg"));
-		background.setLayout(new FlowLayout());
-		add(background);
+        
+		//set up the panels
+		topPanel = new JPanel();
+		mapPanel = new JPanel();
+		itemPanel = new JPanel();
 		
+		//set the size and layouts for the panels and background
+		background.setLayout(new BorderLayout(10,10));
+		topPanel.setLayout(new FlowLayout());
+		mapPanel.setLayout(new GridLayout(3,3,10,10)); //make it a 3x3 grid with empty spaces
+		itemPanel.setLayout(new FlowLayout());
+		background.setSize(500,400);
+		background.add(topPanel);
+		topPanel.setOpaque(false);
+		mapPanel.setOpaque(false);
+		itemPanel.setOpaque(false);
 		
 		//add all this
-		background.add(buttonStart);
-		background.add(labelMessage);
-		background.add(buttonUp);
-		background.add(buttonRight);
-		background.add(buttonLeft);
-		background.add(buttonDown);
+		itemPanel.add(buttonStart);
+		topPanel.add(labelMessage);
+		//empty label
+		mapPanel.add(new JLabel(" "));
+		mapPanel.add(buttonUp);
+		//empty label
+		mapPanel.add(new JLabel(" "));
+		mapPanel.add(buttonLeft);
+		//empty label
+		mapPanel.add(new JLabel(" "));
+		mapPanel.add(buttonRight);
+		//empty label
+		mapPanel.add(new JLabel(" "));
+		mapPanel.add(buttonDown);
 		
 		//add a combo box to hold items for use
 		//http://da2i.univ-lille1.fr/doc/tutorial-java/uiswing/components/combobox.html
 		itemList.setSelectedIndex(0);
-		background.add(itemList);
-		background.add(buttonUse);
-		background.add(labelHP);
+		itemPanel.add(itemList);
+		itemPanel.add(buttonUse);
+		topPanel.add(labelHP);
 		
 		
 		
-		//add(panel);
+		
+		//add panels
+		background.add(topPanel, BorderLayout.NORTH);
+		background.add(mapPanel, BorderLayout.CENTER);
+		background.add(itemPanel, BorderLayout.SOUTH);
+		add(background);
+		
+		//topPanel.setSize(500,200);
+		//mapPanel.setSize(200,150);
+		//itemPanel.setSize(500,50);
 		
 		//labelMessage.setForeground(Color.WHITE);
 		setTitle("Text Adventure Game");
@@ -92,6 +125,7 @@ public class Frame extends JFrame implements ActionListener {
 		buttonUse.addActionListener(this);
 		buttonStart.addActionListener(this);
 		itemList.addActionListener(this);
+		
 	
 		//start a new game
 		game = new Game();
@@ -149,8 +183,15 @@ public class Frame extends JFrame implements ActionListener {
 		}
 		if (e.getSource() == buttonUse) //use an item in the list
 		{
-			int item = itemList.getSelectedIndex(); //get the selected item
-			itemList.removeItemAt(item); //remove the used item
+			if (itemList.getItemCount() > 0)
+			{
+				int item = itemList.getSelectedIndex(); //get the selected item
+				String s = itemList.getSelectedItem().toString(); //probably need to change this
+				itemList.removeItemAt(item); //remove the used item
+				game.useItem(s); //does whatever Game's useItem() will do
+			} else {
+				System.out.println("There's no items!");
+			}
 		}
 		
 	}
