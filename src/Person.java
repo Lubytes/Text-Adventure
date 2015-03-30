@@ -26,7 +26,9 @@ public class Person {
 		
 	}
 	
-	
+	public ArrayList<Item> getInventory() {
+		return inv;
+	}
 	
 	
 }
