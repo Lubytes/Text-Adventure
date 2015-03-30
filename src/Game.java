@@ -118,5 +118,9 @@ public class Game {
 		System.out.println(name); //TESTING
 	}
 	
+	public ArrayList<Item> getInventoryOfPerson() {
+		return person.getInventory();
+	}
+	
 	
 }
