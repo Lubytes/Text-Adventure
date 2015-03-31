@@ -28,7 +28,7 @@ public class Tile {
 	
 	public void setItem(String n, int d, int u)
 	{
-		item = new Item(n, d, u);
+		item = new Item();
 		type = n;
 	}
 	
