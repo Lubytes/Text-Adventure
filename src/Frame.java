@@ -74,7 +74,7 @@ public class Frame extends JFrame implements ActionListener {
 		background.setLayout(new BorderLayout(10,10));
 		topPanel.setLayout(new GridLayout(2,1,0,0));
 		infoPanel.setLayout(new FlowLayout());
-		mapPanel.setLayout(new GridLayout(3,3,10,10)); //make it a 3x3 grid with empty spaces
+		mapPanel.setLayout(new GridLayout(3,3,25,0)); //make it a 3x3 grid with empty spaces
 		itemPanel.setLayout(new FlowLayout());
 		topPanel.setOpaque(false);
 		mapPanel.setOpaque(false);
@@ -155,6 +155,7 @@ public class Frame extends JFrame implements ActionListener {
 		//labelMessage.setForeground(Color.WHITE);
 		setTitle("Text Adventure Game");
 		setSize(500,400);
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		
