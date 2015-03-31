@@ -46,9 +46,6 @@ public class Frame extends JFrame implements ActionListener {
 		labelMessage.setEditable(false);
 		labelMessage.setOpaque(false);
 		
-		//player hit points
-		labelHP = new JLabel("HP: " + game.getPerson().getHP());
-		
 		//get the names of items from the ArrayList
 		//and put them into the item string array
 		
@@ -91,6 +88,8 @@ public class Frame extends JFrame implements ActionListener {
 		//start a new game
 		game = new Game();
 		inventory = game.getInventoryOfPerson();
+		//player hit points
+		labelHP = new JLabel("HP: " + game.getPerson().getHP());
 		
 		//testing adding items to the combobox
 		Item i1 = new Item("Stick", 2, 10);
