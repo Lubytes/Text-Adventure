@@ -12,7 +12,14 @@ public class Person {
 	
 	public Person(){
 		hp = 100;
-		attack = 50;
+	}
+	
+	public int getHP(){
+		return hp;
+	}
+	
+	public void cngHP(int a){
+		hp += a;
 	}
 	
 	//Max inv space is currently 5
@@ -35,7 +42,4 @@ public class Person {
 	public ArrayList<Item> getInventory() {
 		return inv;
 	}
-	
-	
-	
 }
