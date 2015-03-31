@@ -141,6 +141,12 @@ public class Game {
 		return person; //gets the person
 	}
 	
+	public void Bettle()
+	{
+		current.getType().equals("wild_enemy")
+	}
+	
+	
 	
 	
 	
