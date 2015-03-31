@@ -198,6 +198,7 @@ public class Frame extends JFrame implements ActionListener {
 			buttonDown.setEnabled(true);
 			buttonLeft.setEnabled(true);
 			buttonRight.setEnabled(true);
+			setEmpty(curr);
 			//Set the tile so no more battles are here
 		}
 	}
@@ -355,6 +356,10 @@ public class Frame extends JFrame implements ActionListener {
 
 	}
 
+	public void setEmpty(Tile a){
+		a.setType("empty");
+	}
+	
 	public void disable(){
 		if(game.getPerson().getHP()<=0){
 			if(btnleftClicked == false){
