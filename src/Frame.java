@@ -33,8 +33,12 @@ public class Frame extends JFrame implements ActionListener {
 	//for background image
 	private JLabel background;
 	private Game game; //make a game
-
 	
+	//boolean to disable the button
+	private boolean btnleftClicked = true;
+	private boolean btnrightClicked = true;
+	private boolean btnupClicked = true;
+	private boolean btndownClicked = true;
 	
 	public Frame() throws IOException
 	{
@@ -233,5 +237,22 @@ public class Frame extends JFrame implements ActionListener {
 			}
 		}
 		
+	}
+	
+	public void disable(){
+		if(game.getPerson().getHP()<=0){
+			if(btnleftClicked == false){
+				buttonLeft.setEnabled(true);
+		}
+			if(btnrightClicked == false){
+				buttonRight.setEnabled(true);
+		}
+			if(btnupClicked == false){
+				buttonUp.setEnabled(true);
+		}
+			if(btndownClicked == false){
+				buttonDown.setEnabled(true);
+		}
+			
 	}
 }
