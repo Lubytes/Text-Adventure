@@ -21,7 +21,7 @@ public class Frame extends JFrame implements ActionListener {
 	private JButton buttonStart; //Start button
 	private JTextArea labelMessage; //holds game text
 	private JLabel labelHP; //displays the person's hp
-	private int hp = 100; //change this to getPerson().getHP() or something when it exists
+	
 	private String message = "This is the space where the game will say messages.\n" +
 			" It will relay what is happening in the game.\n" +
 			" We are going to need a lot of strings."; //text message from the game
@@ -32,6 +32,8 @@ public class Frame extends JFrame implements ActionListener {
 	//for background image
 	private JLabel background;
 	private Game game; //make a game
+
+	
 	
 	public Frame() throws IOException
 	{
@@ -44,7 +46,7 @@ public class Frame extends JFrame implements ActionListener {
 		labelMessage.setOpaque(false);
 		
 		//player hit points
-		labelHP = new JLabel("HP: " + hp);
+		labelHP = new JLabel("HP: " + game.getPerson().getHP());
 		
 		//get the names of items from the ArrayList
 		//and put them into the item string array

@@ -7,6 +7,7 @@ public class Person {
 	private int hp;
 	private int attack;
 	private int parts;
+	private boolean hasAttacked = false;
 	
 	private ArrayList<Item> inv = new ArrayList<Item>();
 	
@@ -32,6 +33,14 @@ public class Person {
 		if (parts == 8)
 			return true;
 		return false;
+	}
+	
+	public boolean attacked(){
+		return hasAttacked;
+	}
+	
+	public void setAttacked(boolean a){
+		hasAttacked = a;
 	}
 	
 	//Max inv space is currently 5
