@@ -11,7 +11,7 @@ public class World {
 	private String fileName = "maps/map01.csv";
 	private int row = 0; //keeps track of row #
 	private int col = 0; //keeps track of col #
-	private Enemy tiger = new Enemy();
+	private Enemy tiger = new Enemy("Tiger", 100, 42);
 	
 	//default constructor
 	public World()
@@ -252,9 +252,9 @@ public class World {
 		//you can use the tile type to do stuff
 		for (int i=0; i<6; i++)
 		{
-			if (w.getTile(i, 5).getType().equals("enemy_tiger"))
+			if (w.getTile(i, 5).getType().equals(tiger);
 			{
-				System.out.println("Oh no, a tiger!");
+				System.out.print(tiger);
 			} else {
 				System.out.println("Step");
 			}
