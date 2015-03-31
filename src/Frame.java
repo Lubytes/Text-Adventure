@@ -102,19 +102,9 @@ public class Frame extends JFrame implements ActionListener {
 		//player hit points
 		labelHP = new JLabel("HP: " + hp);
 
-		//testing adding items to the combobox
-		Item i1 = new Item("Stick", 2, 10);
-		Item i2 = new Item("Health", 4, 10);
-		game.getPerson().addItem(i1);
-		game.getPerson().addItem(i2);
+		
 		//size the item list appropriately
 		items = new String[inventory.size()];
-
-		//puts the names of the inventory into the combo box
-		for (int i = 0; i<game.getPerson().getInventory().size(); i++)
-		{
-			items[i] = game.getPerson().getInventory().get(i).getName();
-		}
 
 		//populate item list
 		itemList = new JComboBox(items);
@@ -123,7 +113,8 @@ public class Frame extends JFrame implements ActionListener {
 
 		//add a combo box to hold items for use
 		//http://da2i.univ-lille1.fr/doc/tutorial-java/uiswing/components/combobox.html
-		itemList.setSelectedIndex(0);
+		
+		//itemList.setSelectedIndex(0);
 		itemPanel.add(itemList);
 		itemPanel.add(buttonUse);
 		itemPanel.add(buttonFist);
@@ -221,6 +212,28 @@ public class Frame extends JFrame implements ActionListener {
 			labelMessage.setText(message); 
 		}
 	}
+	
+	//find an item
+	public void findItem()
+	{
+		inventory.add(new Item()); //add a new item to inventory
+		System.out.println(inventory);
+		//size the item list appropriately
+		items = new String[inventory.size()];
+		
+		//give a message
+		message = "You found a " + inventory.get(inventory.size()-1).getName();
+		labelMessage.setText(message);
+
+		//puts the names of the inventory into the combo box
+		for (int i = 0; i<game.getPerson().getInventory().size(); i++)
+		{
+			items[i] = game.getPerson().getInventory().get(i).getName();
+		}
+
+		//populate item list
+		itemList.setModel(new DefaultComboBoxModel(items));
+	}
 
 	public static void main(String[] args) throws IOException
 	{
@@ -255,6 +268,10 @@ public class Frame extends JFrame implements ActionListener {
 			if(curr.getType().equals("wild_enemy"))
 				battleStart();
 			updateHP();
+			if(curr.getType().equals("item")) //is it an item tile?
+			{
+				findItem(); //you found an item!
+			}
 
 		}
 		if (e.getSource() == buttonDown) //pressing the down button
@@ -267,6 +284,10 @@ public class Frame extends JFrame implements ActionListener {
 			if(curr.getType().equals("wild_enemy"))
 				battleStart();
 			updateHP();
+			if(curr.getType().equals("item")) //is it an item tile?
+			{
+				findItem(); //you found an item!
+			}
 		}
 		if (e.getSource() == buttonRight) //pressing the right button
 		{
@@ -278,6 +299,10 @@ public class Frame extends JFrame implements ActionListener {
 			if(curr.getType().equals("wild_enemy"))
 				battleStart();
 			updateHP();
+			if(curr.getType().equals("item")) //is it an item tile?
+			{
+				findItem(); //you found an item!
+			}
 		}
 		if (e.getSource() == buttonLeft) //pressing the left button
 		{
@@ -289,6 +314,10 @@ public class Frame extends JFrame implements ActionListener {
 			if(curr.getType().equals("wild_enemy"))
 				battleStart();
 			updateHP();
+			if(curr.getType().equals("item")) //is it an item tile?
+			{
+				findItem(); //you found an item!
+			}
 
 		}
 		if (e.getSource() == buttonUse) //use an item in the list

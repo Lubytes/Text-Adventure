@@ -79,6 +79,10 @@ public class World {
 					} else if (array[col].equals("finish")) {
 						//the finish tile
 						tile.setType("finish");
+					} else if (array[col].equals("item")) {
+						tile.setType("item");	
+					} else if (array[col].equals("part")) {
+						tile.setType("part");	
 					} else if (array[col].equals("wild_enemy")) {
 						Random rand = new Random(); //random number
 						int n = rand.nextInt(1); //a bigger number lowers the odds
