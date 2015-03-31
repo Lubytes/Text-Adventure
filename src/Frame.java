@@ -238,6 +238,7 @@ public class Frame extends JFrame implements ActionListener {
 
 		//populate item list
 		itemList.setModel(new DefaultComboBoxModel(items));
+		setEmpty(curr);
 	}
 
 	public static void main(String[] args) throws IOException
@@ -257,7 +258,9 @@ public class Frame extends JFrame implements ActionListener {
 				message = game.getStatus();
 				labelMessage.setText(message);
 				//resets the item list
-				itemList.setModel(new DefaultComboBoxModel(items));
+				inventory.removeAll(inventory); //empty the inventory
+				String [] empty = new String[0];
+				itemList.setModel(new DefaultComboBoxModel(empty));
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
