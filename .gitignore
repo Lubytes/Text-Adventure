@@ -1,0 +1,16 @@
+
+*.class
+
+.classpath
+
+.classpath
+
+bin/World.class
+
+bin/Tile.class
+
+bin/Person.class
+
+*.class
+
+.classpath
