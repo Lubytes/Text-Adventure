@@ -79,7 +79,7 @@ public class Game {
 			status = current.getType(); //delete this
 			System.out.println(xPos + ", " + yPos); //prints pos
 			if(current.getType().equals("wild_enemy")){
-				person.battle();
+				battle();
 			}
 			
 		} else if (yPos<=0){
@@ -97,7 +97,7 @@ public class Game {
 			status = current.getType(); //delete this
 			System.out.println(xPos + ", " + yPos); //prints pos
 			if(current.getType().equals("wild_enemy")){
-				person.battle();
+				battle();
 			}
 		} else if (yPos >= world.getMap().size()-2) {
 			System.out.println("Can't move, edge");
@@ -114,7 +114,7 @@ public class Game {
 			status = current.getType(); //delete this
 			System.out.println(xPos + ", " + yPos); //prints pos
 			if(current.getType().equals("wild_enemy")){
-				person.battle();
+				battle();
 			}
 		} else if (xPos >= world.getMap().get(yPos).size()-1){
 			System.out.println("Can't move, edge");
@@ -131,7 +131,7 @@ public class Game {
 			status = current.getType(); //delete this
 			System.out.println(xPos + ", " + yPos); //prints pos
 			if(current.getType().equals("wild_enemy")){
-				person.battle();
+				battle();
 			}
 		} else if (xPos <= 0) {
 			System.out.println("Can't move, edge");
