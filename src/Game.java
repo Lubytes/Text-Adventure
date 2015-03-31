@@ -78,6 +78,10 @@ public class Game {
 			current = world.getTile(yPos, xPos); //sets the position
 			status = current.getType(); //delete this
 			System.out.println(xPos + ", " + yPos); //prints pos
+			if(current.getType().equals("wild_enemy")){
+				person.battle();
+			}
+			
 		} else if (yPos<=0){
 			System.out.println("Can't move, edge");
 			status = "You can't move in that direction.";
@@ -92,6 +96,9 @@ public class Game {
 			current = world.getTile(yPos, xPos); //sets the position
 			status = current.getType(); //delete this
 			System.out.println(xPos + ", " + yPos); //prints pos
+			if(current.getType().equals("wild_enemy")){
+				person.battle();
+			}
 		} else if (yPos >= world.getMap().size()-2) {
 			System.out.println("Can't move, edge");
 			status = "You can't move in that direction.";
@@ -106,6 +113,9 @@ public class Game {
 			current = world.getTile(yPos, xPos); //sets the position
 			status = current.getType(); //delete this
 			System.out.println(xPos + ", " + yPos); //prints pos
+			if(current.getType().equals("wild_enemy")){
+				person.battle();
+			}
 		} else if (xPos >= world.getMap().get(yPos).size()-1){
 			System.out.println("Can't move, edge");
 			status = "You can't move in that direction.";
@@ -120,6 +130,9 @@ public class Game {
 			current = world.getTile(yPos, xPos); //sets the position
 			status = current.getType(); //delete this
 			System.out.println(xPos + ", " + yPos); //prints pos
+			if(current.getType().equals("wild_enemy")){
+				person.battle();
+			}
 		} else if (xPos <= 0) {
 			System.out.println("Can't move, edge");
 			status = "You can't move in that direction.";
@@ -141,13 +154,10 @@ public class Game {
 		return person; //gets the person
 	}
 	
-	public void Bettle()
+	public void battle()
 	{
-		current.getType().equals("wild_enemy")
+		
 	}
 	
-	
-	
-	
-	
+
 }
