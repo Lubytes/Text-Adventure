@@ -11,6 +11,7 @@ public class World {
 	private String fileName = "maps/map01.csv";
 	private int row = 0; //keeps track of row #
 	private int col = 0; //keeps track of col #
+	private Enemy tiger = new Enemy();
 	
 	//default constructor
 	public World()
