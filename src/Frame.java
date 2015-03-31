@@ -102,12 +102,7 @@ public class Frame extends JFrame implements ActionListener {
 		//player hit points
 		labelHP = new JLabel("HP: " + hp);
 
-<<<<<<< HEAD
-		
-=======
-		//testing adding items to the combobox
 
->>>>>>> origin/master
 		//size the item list appropriately
 		items = new String[inventory.size()];
 
