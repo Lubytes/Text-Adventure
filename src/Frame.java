@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.ArrayList;
 public class Frame extends JFrame implements ActionListener {
 	
 	//private JPanel panel; //the panel to hold stuff
@@ -19,11 +20,12 @@ public class Frame extends JFrame implements ActionListener {
 	private JButton buttonStart; //Start button
 	private JTextArea labelMessage; //holds game text
 	private JLabel labelHP; //displays the person's hp
-	private int hp = 100; //holds the person's hit points. we should put this in the Person class.
+	private int hp = 100; //change this to getPerson().getHP() or something when it exists
 	private String message = "This is the space where the game will say messages.\n" +
 			" It will relay what is happening in the game.\n" +
 			" We are going to need a lot of strings."; //text message from the game
-	private String[] items = {"stick", "health", "thing", "item"}; //array to hold items
+	private ArrayList<Item> inventory; //holds the inventory
+	private String[] items; //array to hold inventory names
 	private JComboBox itemList; //holds the items in a combo box
 	
 	//for background image
@@ -43,8 +45,9 @@ public class Frame extends JFrame implements ActionListener {
 		//player hit points
 		labelHP = new JLabel("HP: " + hp);
 		
-		//populate item list
-		itemList = new JComboBox(items);
+		//get the names of items from the ArrayList
+		//and put them into the item string array
+		
 		
 		//buttons
 		buttonUp = new JButton("Up");
@@ -75,6 +78,39 @@ public class Frame extends JFrame implements ActionListener {
 		mapPanel.setOpaque(false);
 		itemPanel.setOpaque(false);
 		
+		
+		
+	
+		//start a new game
+		game = new Game();
+		inventory = game.getInventoryOfPerson();
+		
+		//testing adding items to the combobox
+		Item i1 = new Item("Stick", 2, 10);
+		Item i2 = new Item("Health", 4, 10);
+		game.getPerson().addItem(i1);
+		game.getPerson().addItem(i2);
+		//size the item list appropriately
+		items = new String[inventory.size()];
+		
+		//puts the names of the inventory into the combo box
+		for (int i = 0; i<game.getPerson().getInventory().size(); i++)
+		{
+			items[i] = game.getPerson().getInventory().get(i).getName();
+		}
+		
+		//populate item list
+		itemList = new JComboBox(items);
+
+		itemList.addActionListener(this);
+		
+		//add a combo box to hold items for use
+		//http://da2i.univ-lille1.fr/doc/tutorial-java/uiswing/components/combobox.html
+		itemList.setSelectedIndex(0);
+		itemPanel.add(itemList);
+		itemPanel.add(buttonUse);
+		topPanel.add(labelHP);
+		
 		//add all this
 		itemPanel.add(buttonStart);
 		topPanel.add(labelMessage);
@@ -90,13 +126,6 @@ public class Frame extends JFrame implements ActionListener {
 		//empty label
 		mapPanel.add(new JLabel(" "));
 		mapPanel.add(buttonDown);
-		
-		//add a combo box to hold items for use
-		//http://da2i.univ-lille1.fr/doc/tutorial-java/uiswing/components/combobox.html
-		itemList.setSelectedIndex(0);
-		itemPanel.add(itemList);
-		itemPanel.add(buttonUse);
-		topPanel.add(labelHP);
 		
 		
 		
@@ -124,11 +153,7 @@ public class Frame extends JFrame implements ActionListener {
 		buttonDown.addActionListener(this);
 		buttonUse.addActionListener(this);
 		buttonStart.addActionListener(this);
-		itemList.addActionListener(this);
 		
-	
-		//start a new game
-		game = new Game();
 	}
 	
 	public static void main(String[] args) throws IOException
@@ -188,6 +213,7 @@ public class Frame extends JFrame implements ActionListener {
 				int item = itemList.getSelectedIndex(); //get the selected item
 				String s = itemList.getSelectedItem().toString(); //probably need to change this
 				itemList.removeItemAt(item); //remove the used item
+				inventory.remove(item); //removes the item from inventory arraylist
 				game.useItem(s); //does whatever Game's useItem() will do
 			} else {
 				System.out.println("There's no items!");

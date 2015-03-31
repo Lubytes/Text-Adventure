@@ -136,5 +136,10 @@ public class Game {
 		return person.getInventory();
 	}
 	
+	public Person getPerson()
+	{
+		return person; //gets the person
+	}
+	
 	
 }
