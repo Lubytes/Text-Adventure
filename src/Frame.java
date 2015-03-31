@@ -102,7 +102,12 @@ public class Frame extends JFrame implements ActionListener {
 		//player hit points
 		labelHP = new JLabel("HP: " + hp);
 
+<<<<<<< HEAD
 		
+=======
+		//testing adding items to the combobox
+
+>>>>>>> origin/master
 		//size the item list appropriately
 		items = new String[inventory.size()];
 
@@ -191,11 +196,14 @@ public class Frame extends JFrame implements ActionListener {
 		
 
 		if(game.getPerson().getHP()<=0){
-			//game over
+			updateHP();//Game over message
 		}
 		if(enemy.getHP()<=0){
-			//restore the movement
-			//end the battle
+			buttonUp.setEnabled(true);
+			buttonDown.setEnabled(true);
+			buttonLeft.setEnabled(true);
+			buttonRight.setEnabled(true);
+			//Set the tile so no more battles are here
 		}
 	}
 
