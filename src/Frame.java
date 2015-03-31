@@ -113,7 +113,7 @@ public class Frame extends JFrame implements ActionListener {
 
 		//add a combo box to hold items for use
 		//http://da2i.univ-lille1.fr/doc/tutorial-java/uiswing/components/combobox.html
-		
+
 		//itemList.setSelectedIndex(0);
 		itemPanel.add(itemList);
 		itemPanel.add(buttonUse);
@@ -179,16 +179,17 @@ public class Frame extends JFrame implements ActionListener {
 		buttonDown.setEnabled(false);
 		buttonLeft.setEnabled(false);
 		buttonRight.setEnabled(false);
-		
+
 		enemy = new Enemy();
 
-	
+
 	}
 
 	public void battleCont(){
-		game.getPerson().cngHP(enemy.getAttack());
+		if(enemy.getHP()>0)
+			game.getPerson().cngHP(enemy.getAttack());
 
-		
+
 
 		if(game.getPerson().getHP()<=0){
 			updateHP();//Game over message
@@ -216,7 +217,7 @@ public class Frame extends JFrame implements ActionListener {
 			labelMessage.setText(message); 
 		}
 	}
-	
+
 	//find an item
 	public void findItem()
 	{
@@ -224,7 +225,7 @@ public class Frame extends JFrame implements ActionListener {
 		System.out.println(inventory);
 		//size the item list appropriately
 		items = new String[inventory.size()];
-		
+
 		//give a message
 		message = "You found a " + inventory.get(inventory.size()-1).getName();
 		labelMessage.setText(message);
@@ -337,7 +338,7 @@ public class Frame extends JFrame implements ActionListener {
 				itemList.removeItemAt(item); //remove the used item
 				inventory.remove(item); //removes the item from inventory arraylist
 				//game.useItem(s); //does whatever Game's useItem() will do
-				
+
 			} else {
 				System.out.println("There's no items!");
 			}
@@ -349,8 +350,12 @@ public class Frame extends JFrame implements ActionListener {
 			//do some punch stuff
 			message = "Punching!";
 			labelMessage.setText(message);
-			if(curr.getType().equals("wild_enemy"))
+			if(curr.getType().equals("wild_enemy")){
+				message = "Punching! Enemy health down by 2";
+				labelMessage.setText(message);
+				enemy.setHP(2);
 				battleCont();
+			}
 			updateHP();
 		}
 
@@ -359,7 +364,7 @@ public class Frame extends JFrame implements ActionListener {
 	public void setEmpty(Tile a){
 		a.setType("empty");
 	}
-	
+
 	public void disable(){
 		if(game.getPerson().getHP()<=0){
 			if(btnleftClicked == false){
