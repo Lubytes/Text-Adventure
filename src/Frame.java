@@ -19,9 +19,11 @@ public class Frame extends JFrame implements ActionListener {
 	private JButton buttonRight; //up button
 	private JButton buttonLeft; //up button
 	private JButton buttonUse; //Use Item button
+	private JButton buttonFist; //attack without a weapon
 	private JButton buttonStart; //Start button
 	private JTextArea labelMessage; //holds game text
 	private JLabel labelHP; //displays the person's hp
+	private int hp = 100;
 	
 	private String message = "This is the space where the game will say messages.\n" +
 			" It will relay what is happening in the game.\n" +
@@ -60,6 +62,7 @@ public class Frame extends JFrame implements ActionListener {
 		buttonLeft = new JButton("Left");
 		buttonDown = new JButton("Down");
 		buttonUse = new JButton("Use Item");
+		buttonFist = new JButton("Punch");
 		buttonStart = new JButton("New Game");
 		
 		//setting a background image
@@ -91,9 +94,10 @@ public class Frame extends JFrame implements ActionListener {
 	
 		//start a new game
 		game = new Game();
+		hp = game.getPerson().getHP();
 		inventory = game.getInventoryOfPerson();
 		//player hit points
-		labelHP = new JLabel("HP: " + game.getPerson().getHP());
+		labelHP = new JLabel("HP: " + hp);
 		
 		//testing adding items to the combobox
 		Item i1 = new Item("Stick", 2, 10);
@@ -119,6 +123,7 @@ public class Frame extends JFrame implements ActionListener {
 		itemList.setSelectedIndex(0);
 		itemPanel.add(itemList);
 		itemPanel.add(buttonUse);
+		itemPanel.add(buttonFist);
 		infoPanel.add(labelHP);
 		
 		//add all this
@@ -170,7 +175,22 @@ public class Frame extends JFrame implements ActionListener {
 		buttonDown.addActionListener(this);
 		buttonUse.addActionListener(this);
 		buttonStart.addActionListener(this);
+		buttonFist.addActionListener(this);
 		
+	}
+	
+	public void updateHP()
+	{
+		//get the hp
+		hp = game.getPerson().getHP();
+		labelHP.setText("HP: " + hp);
+		System.out.println("updating the hp to " + hp);
+		
+		if(hp<=0) //no hp left
+		{
+			message = "You're dead!"; //print the status in the message
+			labelMessage.setText(message); 
+		}
 	}
 	
 	public static void main(String[] args) throws IOException
@@ -186,6 +206,7 @@ public class Frame extends JFrame implements ActionListener {
 			//make a game
 			try {
 				game = new Game();
+				updateHP();
 				message = game.getStatus();
 				labelMessage.setText(message);
 				//resets the item list
@@ -201,6 +222,9 @@ public class Frame extends JFrame implements ActionListener {
 			message = game.getStatus(); //print the status in the message
 			labelMessage.setText(message);
 			System.out.println("Move Up");
+			
+			updateHP();
+			
 		}
 		if (e.getSource() == buttonDown) //pressing the down button
 		{
@@ -208,6 +232,8 @@ public class Frame extends JFrame implements ActionListener {
 			message = game.getStatus();
 			labelMessage.setText(message);
 			System.out.println("Move Down");
+			
+			updateHP();
 		}
 		if (e.getSource() == buttonRight) //pressing the right button
 		{
@@ -215,6 +241,8 @@ public class Frame extends JFrame implements ActionListener {
 			message = game.getStatus();
 			labelMessage.setText(message);
 			System.out.println("Move Right");
+			
+			updateHP();
 		}
 		if (e.getSource() == buttonLeft) //pressing the left button
 		{
@@ -222,6 +250,8 @@ public class Frame extends JFrame implements ActionListener {
 			message = game.getStatus();
 			labelMessage.setText(message);
 			System.out.println("Move Left");
+			
+			updateHP();
 		}
 		if (e.getSource() == buttonUse) //use an item in the list
 		{
@@ -235,6 +265,16 @@ public class Frame extends JFrame implements ActionListener {
 			} else {
 				System.out.println("There's no items!");
 			}
+			
+			updateHP();
+		}
+		if (e.getSource() == buttonFist) //the punch button
+		{
+			//do some punch stuff
+			message = "Punching!";
+			labelMessage.setText(message);
+			
+			updateHP();
 		}
 		
 	}
