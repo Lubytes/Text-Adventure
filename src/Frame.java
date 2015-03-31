@@ -27,6 +27,7 @@ public class Frame extends JFrame implements ActionListener {
 	private int hp = 100;
 	private Tile curr;
 	private Enemy enemy;
+	private boolean isInBattle = false;
 
 	private String message = "This is the space where the game will say messages.\n" +
 			" It will relay what is happening in the game.\n" +
@@ -176,6 +177,7 @@ public class Frame extends JFrame implements ActionListener {
 
 	public void battleStart(){
 		//disable movement
+		isInBattle = true;
 		buttonUp.setEnabled(false);
 		buttonDown.setEnabled(false);
 		buttonLeft.setEnabled(false);
@@ -201,6 +203,7 @@ public class Frame extends JFrame implements ActionListener {
 			buttonLeft.setEnabled(true);
 			buttonRight.setEnabled(true);
 			setEmpty(curr);
+			isInBattle = false;
 			//Set the tile so no more battles are here
 		}
 	}
@@ -361,6 +364,19 @@ public class Frame extends JFrame implements ActionListener {
 				battleCont();
 			}
 			updateHP();
+		}
+		
+		if (e.getSource() == buttonEscape) {// the escape button
+			if (!isInBattle) {
+			     message = "Fleeing from the enemy!";
+			     labelMessage.setText(message);
+			     updateHP();
+			}
+			else {
+		             message = "There is nothing to flee from!";
+		             labelMessage.setText(message);
+			}
+			
 		}
 
 	}
