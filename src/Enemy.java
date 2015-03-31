@@ -1,11 +1,11 @@
 
 public class Enemy {
   String enemyType;
-  private hp;
-  private attack;
+  private int hp;
+  private int attack;
   
   public Enemy(String t, int hp, int attack) {
-      this.type = t;
+      this.enemyType = t;
       this.hp = hp;
       this.attack = attack;
   }

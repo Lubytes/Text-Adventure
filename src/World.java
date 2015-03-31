@@ -252,9 +252,9 @@ public class World {
 		//you can use the tile type to do stuff
 		for (int i=0; i<6; i++)
 		{
-			if (w.getTile(i, 5).getType().equals(tiger);
+			if (w.getTile(i, 5).getType().equals("tiger"))
 			{
-				System.out.print(tiger);
+				System.out.print("tiger");
 			} else {
 				System.out.println("Step");
 			}

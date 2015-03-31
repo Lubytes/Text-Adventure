@@ -22,7 +22,7 @@ public class Tile {
 	
 	public void setEnemy(String s)
 	{
-		enemy = new Enemy();
+		enemy = new Enemy(s);
 		type = s;
 	}
 	
