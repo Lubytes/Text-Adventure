@@ -67,6 +67,7 @@ public class Frame extends JFrame implements ActionListener {
 		buttonUse = new JButton("Use Item");
 		buttonFist = new JButton("Punch");
 		buttonStart = new JButton("New Game");
+		buttonFist = new JButton("Escape");
 
 		//setting a background image
 		//got this here http://java-demos.blogspot.ca/2012/09/setting-background-image-in-jframe.html
