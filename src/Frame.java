@@ -9,9 +9,10 @@ import java.util.ArrayList;
 public class Frame extends JFrame implements ActionListener {
 	
 	//private JPanel panel; //the panel to hold stuff
-	private JPanel topPanel; //panel with text message and HP
+	private JPanel topPanel; //holds top stuff
 	private JPanel mapPanel; //holds the directional buttons
 	private JPanel itemPanel; //holds the items
+	private JPanel infoPanel; //panel with text message and HP
 	private JButton buttonUp; //up button
 	private JButton buttonDown; //up button
 	private JButton buttonRight; //up button
@@ -66,10 +67,12 @@ public class Frame extends JFrame implements ActionListener {
 		topPanel = new JPanel();
 		mapPanel = new JPanel();
 		itemPanel = new JPanel();
+		infoPanel = new JPanel();
 		
 		//set the size and layouts for the panels and background
 		background.setLayout(new BorderLayout(10,10));
-		topPanel.setLayout(new FlowLayout());
+		topPanel.setLayout(new GridLayout(2,1,0,0));
+		infoPanel.setLayout(new FlowLayout());
 		mapPanel.setLayout(new GridLayout(3,3,10,10)); //make it a 3x3 grid with empty spaces
 		itemPanel.setLayout(new FlowLayout());
 		background.setSize(500,400);
@@ -77,6 +80,7 @@ public class Frame extends JFrame implements ActionListener {
 		topPanel.setOpaque(false);
 		mapPanel.setOpaque(false);
 		itemPanel.setOpaque(false);
+		infoPanel.setOpaque(false);
 		
 		
 		
@@ -109,11 +113,13 @@ public class Frame extends JFrame implements ActionListener {
 		itemList.setSelectedIndex(0);
 		itemPanel.add(itemList);
 		itemPanel.add(buttonUse);
-		topPanel.add(labelHP);
+		infoPanel.add(labelHP);
 		
 		//add all this
-		itemPanel.add(buttonStart);
-		topPanel.add(labelMessage);
+		topPanel.add(buttonStart);
+		buttonStart.setPreferredSize(new Dimension(50, 50));
+		infoPanel.add(labelMessage);
+		topPanel.add(infoPanel);
 		//empty label
 		mapPanel.add(new JLabel(" "));
 		mapPanel.add(buttonUp);
