@@ -13,6 +13,7 @@ public class Frame extends JFrame implements ActionListener {
 	private JPanel mapPanel; //holds the directional buttons
 	private JPanel itemPanel; //holds the items
 	private JPanel infoPanel; //panel with text message and HP
+	private JPanel newPanel; //holds new game button
 	private JButton buttonUp; //up button
 	private JButton buttonDown; //up button
 	private JButton buttonRight; //up button
@@ -21,7 +22,7 @@ public class Frame extends JFrame implements ActionListener {
 	private JButton buttonStart; //Start button
 	private JTextArea labelMessage; //holds game text
 	private JLabel labelHP; //displays the person's hp
-	private int hp = 100; //change this to getPerson().getHP() or something when it exists
+	
 	private String message = "This is the space where the game will say messages.\n" +
 			" It will relay what is happening in the game.\n" +
 			" We are going to need a lot of strings."; //text message from the game
@@ -32,6 +33,8 @@ public class Frame extends JFrame implements ActionListener {
 	//for background image
 	private JLabel background;
 	private Game game; //make a game
+
+	
 	
 	public Frame() throws IOException
 	{
@@ -42,9 +45,6 @@ public class Frame extends JFrame implements ActionListener {
 		labelMessage.setPreferredSize(new Dimension(400, 100)); //sizes the textbox
 		labelMessage.setEditable(false);
 		labelMessage.setOpaque(false);
-		
-		//player hit points
-		labelHP = new JLabel("HP: " + hp);
 		
 		//get the names of items from the ArrayList
 		//and put them into the item string array
@@ -68,6 +68,7 @@ public class Frame extends JFrame implements ActionListener {
 		mapPanel = new JPanel();
 		itemPanel = new JPanel();
 		infoPanel = new JPanel();
+		newPanel = new JPanel();
 		
 		//set the size and layouts for the panels and background
 		background.setLayout(new BorderLayout(10,10));
@@ -75,12 +76,11 @@ public class Frame extends JFrame implements ActionListener {
 		infoPanel.setLayout(new FlowLayout());
 		mapPanel.setLayout(new GridLayout(3,3,10,10)); //make it a 3x3 grid with empty spaces
 		itemPanel.setLayout(new FlowLayout());
-		background.setSize(500,400);
-		background.add(topPanel);
 		topPanel.setOpaque(false);
 		mapPanel.setOpaque(false);
 		itemPanel.setOpaque(false);
 		infoPanel.setOpaque(false);
+		newPanel.setOpaque(false);
 		
 		
 		
@@ -88,6 +88,8 @@ public class Frame extends JFrame implements ActionListener {
 		//start a new game
 		game = new Game();
 		inventory = game.getInventoryOfPerson();
+		//player hit points
+		labelHP = new JLabel("HP: " + game.getPerson().getHP());
 		
 		//testing adding items to the combobox
 		Item i1 = new Item("Stick", 2, 10);
@@ -116,9 +118,11 @@ public class Frame extends JFrame implements ActionListener {
 		infoPanel.add(labelHP);
 		
 		//add all this
-		topPanel.add(buttonStart);
-		buttonStart.setPreferredSize(new Dimension(50, 50));
+		newPanel.add(buttonStart);
+		newPanel.setPreferredSize(new Dimension(500, 50));
+		newPanel.setSize(500, 50);
 		infoPanel.add(labelMessage);
+		topPanel.add(newPanel);
 		topPanel.add(infoPanel);
 		//empty label
 		mapPanel.add(new JLabel(" "));
@@ -134,12 +138,14 @@ public class Frame extends JFrame implements ActionListener {
 		mapPanel.add(buttonDown);
 		
 		
-		
+		background.setSize(500,400);
+		background.add(topPanel);
 		
 		//add panels
 		background.add(topPanel, BorderLayout.NORTH);
 		background.add(mapPanel, BorderLayout.CENTER);
 		background.add(itemPanel, BorderLayout.SOUTH);
+		
 		add(background);
 		
 		//topPanel.setSize(500,200);
