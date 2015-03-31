@@ -12,7 +12,7 @@ public class Game {
 	private int xPos; //the xposition
 	private int yPos; //the y position
 	private Tile current; //the current tile
-	
+
 	private String status; //this will hold status messages to print to the player in the game
 	
 	//constructor - run this when someone clicks "New Game"
@@ -37,6 +37,10 @@ public class Game {
 	public String getStatus()
 	{
 		return status;
+	}
+	
+	public Tile getCurrent(){
+		return current;
 	}
 	
 	//get and set x and y
@@ -78,9 +82,8 @@ public class Game {
 			current = world.getTile(yPos, xPos); //sets the position
 			status = current.getType(); //delete this
 			System.out.println(xPos + ", " + yPos); //prints pos
-			if(current.getType().equals("wild_enemy")){
-				battle();
-			}
+			
+			
 			
 		} else if (yPos<=0){
 			System.out.println("Can't move, edge");
@@ -96,9 +99,8 @@ public class Game {
 			current = world.getTile(yPos, xPos); //sets the position
 			status = current.getType(); //delete this
 			System.out.println(xPos + ", " + yPos); //prints pos
-			if(current.getType().equals("wild_enemy")){
-				battle();
-			}
+			
+			
 		} else if (yPos >= world.getMap().size()-2) {
 			System.out.println("Can't move, edge");
 			status = "You can't move in that direction.";
@@ -113,9 +115,8 @@ public class Game {
 			current = world.getTile(yPos, xPos); //sets the position
 			status = current.getType(); //delete this
 			System.out.println(xPos + ", " + yPos); //prints pos
-			if(current.getType().equals("wild_enemy")){
-				battle();
-			}
+			
+			
 		} else if (xPos >= world.getMap().get(yPos).size()-1){
 			System.out.println("Can't move, edge");
 			status = "You can't move in that direction.";
@@ -130,9 +131,8 @@ public class Game {
 			current = world.getTile(yPos, xPos); //sets the position
 			status = current.getType(); //delete this
 			System.out.println(xPos + ", " + yPos); //prints pos
-			if(current.getType().equals("wild_enemy")){
-				battle();
-			}
+			
+			
 		} else if (xPos <= 0) {
 			System.out.println("Can't move, edge");
 			status = "You can't move in that direction.";
@@ -154,27 +154,7 @@ public class Game {
 		return person; //gets the person
 	}
 	
-	public void battle()
-	{
-		//disable movement(left,right,up,down)
-		Enemy e = new Enemy();
-		person.setAttacked(false);
-		while(e.getHP()>0 && person.getHP()>0)
-		{
-			person.setAttacked(true);
-			if(person.attacked()){
-				person.cngHP(e.getAttack());
-				person.setAttacked(false);
-			}
-		}
-		if(person.getHP()<=0){
-			//game over
-		}
-		else{
-			//restore the movement
-			//end the battle
-		}
-	}
+	
 	
 
 }

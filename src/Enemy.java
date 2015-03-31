@@ -42,8 +42,8 @@ public class Enemy {
   }
   
   //subtracts how much HP it takes as damamge
-  public void setHP(int hp) {
-        this.hp -= hp;
+  public void setHP(int a) {
+        hp -= a;
   }
   
   public int getHP() {

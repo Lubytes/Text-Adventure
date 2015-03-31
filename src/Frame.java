@@ -2,6 +2,7 @@
  * The GUI for the text adventure game
  */
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -24,10 +25,12 @@ public class Frame extends JFrame implements ActionListener {
 	private JTextArea labelMessage; //holds game text
 	private JLabel labelHP; //displays the person's hp
 	private int hp = 100;
+	private Tile curr;
+	private Enemy enemy;
 
 	private String message = "This is the space where the game will say messages.\n" +
-	" It will relay what is happening in the game.\n" +
-	" We are going to need a lot of strings."; //text message from the game
+			" It will relay what is happening in the game.\n" +
+			" We are going to need a lot of strings."; //text message from the game
 	private ArrayList<Item> inventory; //holds the inventory
 	private String[] items; //array to hold inventory names
 	private JComboBox itemList; //holds the items in a combo box
@@ -179,6 +182,32 @@ public class Frame extends JFrame implements ActionListener {
 
 	}
 
+	public void battleStart(){
+		//disable movement
+		buttonUp.setEnabled(false);
+		buttonDown.setEnabled(false);
+		buttonLeft.setEnabled(false);
+		buttonRight.setEnabled(false);
+		
+		enemy = new Enemy();
+
+	
+	}
+
+	public void battleCont(){
+		game.getPerson().cngHP(enemy.getAttack());
+
+		
+
+		if(game.getPerson().getHP()<=0){
+			//game over
+		}
+		if(enemy.getHP()<=0){
+			//restore the movement
+			//end the battle
+		}
+	}
+
 	public void updateHP()
 	{
 		//get the hp
@@ -222,7 +251,9 @@ public class Frame extends JFrame implements ActionListener {
 			message = game.getStatus(); //print the status in the message
 			labelMessage.setText(message);
 			System.out.println("Move Up");
-
+			curr = game.getCurrent();
+			if(curr.getType().equals("wild_enemy"))
+				battleStart();
 			updateHP();
 
 		}
@@ -232,7 +263,9 @@ public class Frame extends JFrame implements ActionListener {
 			message = game.getStatus();
 			labelMessage.setText(message);
 			System.out.println("Move Down");
-
+			curr = game.getCurrent();
+			if(curr.getType().equals("wild_enemy"))
+				battleStart();
 			updateHP();
 		}
 		if (e.getSource() == buttonRight) //pressing the right button
@@ -241,7 +274,9 @@ public class Frame extends JFrame implements ActionListener {
 			message = game.getStatus();
 			labelMessage.setText(message);
 			System.out.println("Move Right");
-
+			curr = game.getCurrent();
+			if(curr.getType().equals("wild_enemy"))
+				battleStart();
 			updateHP();
 		}
 		if (e.getSource() == buttonLeft) //pressing the left button
@@ -250,8 +285,11 @@ public class Frame extends JFrame implements ActionListener {
 			message = game.getStatus();
 			labelMessage.setText(message);
 			System.out.println("Move Left");
-
+			curr = game.getCurrent();
+			if(curr.getType().equals("wild_enemy"))
+				battleStart();
 			updateHP();
+
 		}
 		if (e.getSource() == buttonUse) //use an item in the list
 		{
@@ -259,9 +297,14 @@ public class Frame extends JFrame implements ActionListener {
 			{
 				int item = itemList.getSelectedIndex(); //get the selected item
 				String s = itemList.getSelectedItem().toString(); //probably need to change this
+				if(curr.getType().equals("wild_enemy")){
+					enemy.setHP(inventory.get(item).getDamage());
+					battleCont();
+				}
 				itemList.removeItemAt(item); //remove the used item
 				inventory.remove(item); //removes the item from inventory arraylist
-				game.useItem(s); //does whatever Game's useItem() will do
+				//game.useItem(s); //does whatever Game's useItem() will do
+				
 			} else {
 				System.out.println("There's no items!");
 			}
@@ -273,7 +316,8 @@ public class Frame extends JFrame implements ActionListener {
 			//do some punch stuff
 			message = "Punching!";
 			labelMessage.setText(message);
-
+			if(curr.getType().equals("wild_enemy"))
+				battleCont();
 			updateHP();
 		}
 

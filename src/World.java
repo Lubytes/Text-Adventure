@@ -70,9 +70,9 @@ public class World {
 					{
 						//water tile
 						tile.setObstacle("water");
-					} else if (array[col].equals("enemy_tiger")) {
+					} else if (array[col].equals("wild_enemy")) {
 						//enemy tile
-						tile.setEnemy("enemy_tiger");
+						tile.setEnemy("wild_enemy");
 					} else if (array[col].equals("start")) {
 						//the starting tile
 						tile.setType("start");
@@ -85,7 +85,7 @@ public class World {
 						//random empty or enemy
 						if (n == 0)
 						{
-							tile.setEnemy("enemy_tiger");
+							tile.setEnemy("wild_enemy");
 						} else {
 							tile.setType("empty");
 						}
