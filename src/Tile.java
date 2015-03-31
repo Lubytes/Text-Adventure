@@ -26,10 +26,10 @@ public class Tile {
 		type = s;
 	}
 	
-	public void setItem(String s)
+	public void setItem(String n, int d, int u)
 	{
-		item = new Item();
-		type = s;
+		item = new Item(n, d, u);
+		type = n;
 	}
 	
 	public void setType(String s)

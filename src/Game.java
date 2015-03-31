@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 
 /*
  * This is the actual game.
@@ -55,16 +56,29 @@ public class Game {
 		return yPos;
 	}
 	
+	//check for water
+	public boolean isWater(int row, int col) //check is row,col is a water tile
+	{
+		if (world.getTile(row, col).getType().equals("water")) //if it's a water tile
+		{
+			System.out.println("That's water");
+			status = "That's water, you can't go there.";
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	//move in the world
 	public void moveUp()
 	{
-		if (yPos > 0)
+		if (yPos > 0 && !isWater(yPos-1, xPos))
 		{
 			yPos--;
 			current = world.getTile(yPos, xPos); //sets the position
 			status = current.getType(); //delete this
 			System.out.println(xPos + ", " + yPos); //prints pos
-		} else {
+		} else if (yPos<=0){
 			System.out.println("Can't move, edge");
 			status = "You can't move in that direction.";
 		}
@@ -72,13 +86,13 @@ public class Game {
 	
 	public void moveDown()
 	{
-		if (yPos < world.getMap().size()-1)
+		if (yPos < world.getMap().size()-2 && !isWater(yPos + 1, xPos))
 		{
 			yPos++;
 			current = world.getTile(yPos, xPos); //sets the position
 			status = current.getType(); //delete this
 			System.out.println(xPos + ", " + yPos); //prints pos
-		} else {
+		} else if (yPos >= world.getMap().size()-2) {
 			System.out.println("Can't move, edge");
 			status = "You can't move in that direction.";
 		}
@@ -86,13 +100,13 @@ public class Game {
 	
 	public void moveRight()
 	{
-		if (xPos < world.getMap().get(yPos).size()-1)
+		if (xPos < world.getMap().get(yPos).size()-1 && !isWater(yPos, xPos + 1))
 		{
 			xPos++;
 			current = world.getTile(yPos, xPos); //sets the position
 			status = current.getType(); //delete this
 			System.out.println(xPos + ", " + yPos); //prints pos
-		} else {
+		} else if (xPos >= world.getMap().get(yPos).size()-1){
 			System.out.println("Can't move, edge");
 			status = "You can't move in that direction.";
 		}
@@ -100,13 +114,13 @@ public class Game {
 	
 	public void moveLeft()
 	{
-		if (xPos > 0)
+		if (xPos > 0 && !isWater(yPos, xPos - 1))
 		{
 			xPos--;
 			current = world.getTile(yPos, xPos); //sets the position
 			status = current.getType(); //delete this
 			System.out.println(xPos + ", " + yPos); //prints pos
-		} else {
+		} else if (xPos <= 0) {
 			System.out.println("Can't move, edge");
 			status = "You can't move in that direction.";
 		}
