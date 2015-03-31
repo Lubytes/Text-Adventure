@@ -156,7 +156,24 @@ public class Game {
 	
 	public void battle()
 	{
-		
+		//disable movement(left,right,up,down)
+		Enemy e = new Enemy();
+		person.setAttacked(false);
+		while(e.getHP()>0 && person.getHP()>0)
+		{
+			person.setAttacked(true);
+			if(person.attacked()){
+				person.cngHP(e.getAttack());
+				person.setAttacked(false);
+			}
+		}
+		if(person.getHP()<=0){
+			//game over
+		}
+		else{
+			//restore the movement
+			//end the battle
+		}
 	}
 	
 

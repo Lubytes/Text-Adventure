@@ -29,6 +29,14 @@ public class Person {
 		parts++;
 	}
 	
+	public int getAttack() {
+		return attack;
+	}
+
+	public void setAttack(int attack) {
+		this.attack = attack;
+	}
+
 	public boolean allParts(){
 		if (parts == 8)
 			return true;
