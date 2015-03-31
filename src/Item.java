@@ -6,10 +6,35 @@ public class Item {
 	private int durability;
 	
 	
-	public Item(String n, int d, int u){
-		name = n;
-		damage = d;
-		durability = u;
+	public Item(){
+		
+		int a = (int) (Math.random()*5)+1;
+
+		 if(a == 1){
+			 name = "Water bottle";
+			 damage = 0;
+			 durability = 2;
+		  }
+		  else if(a == 2){
+			name = "Stick";
+			damage = 2;
+			durability = 4;
+		  }
+		  else if(a == 3){
+			name = "Rock";
+			damage = 4;
+			durability = 4;
+		  }
+		  else if(a == 4){
+			name = "Wreckage";
+			damage = 8;
+			durability = 3;
+		  }
+		  else {
+			name = "A bat";
+			damage = 10;
+			durability = 2;
+		  }  
 		
 	}
 	
