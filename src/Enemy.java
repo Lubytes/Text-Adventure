@@ -4,7 +4,6 @@ public class Enemy {
   private int hp;
   private int attack;
   
-<<<<<<< Updated upstream
   public Enemy() {
 	  
 	  int a = (int) (Math.random()*5)+1;
@@ -34,17 +33,9 @@ public class Enemy {
 		hp = 30;
 		attack = 10;
 	  }  
-	  
-	  
-	  
-      
-=======
-  public Enemy(String t) {
-      this.enemyType = t;
-      this.hp = hp;
-      this.attack = attack;
->>>>>>> Stashed changes
   }
+	  
+	  
   
   public void setAttack(int attack) {
         this.attack = attack;
