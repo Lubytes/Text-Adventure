@@ -6,12 +6,14 @@ import java.util.ArrayList;
 public class Person {
 	private int hp;
 	private int attack;
+	private int parts;
 	
 	private ArrayList<Item> inv = new ArrayList<Item>();
 	
 	
 	public Person(){
 		hp = 100;
+		parts = 0;
 	}
 	
 	public int getHP(){
@@ -20,6 +22,16 @@ public class Person {
 	
 	public void cngHP(int a){
 		hp += a;
+	}
+	
+	public void addPart(){
+		parts++;
+	}
+	
+	public boolean allParts(){
+		if (parts == 8)
+			return true;
+		return false;
 	}
 	
 	//Max inv space is currently 5
