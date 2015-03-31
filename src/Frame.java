@@ -7,7 +7,7 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
 public class Frame extends JFrame implements ActionListener {
-	
+
 	//private JPanel panel; //the panel to hold stuff
 	private JPanel topPanel; //holds top stuff
 	private JPanel mapPanel; //holds the directional buttons
@@ -24,38 +24,38 @@ public class Frame extends JFrame implements ActionListener {
 	private JTextArea labelMessage; //holds game text
 	private JLabel labelHP; //displays the person's hp
 	private int hp = 100;
-	
+
 	private String message = "This is the space where the game will say messages.\n" +
-			" It will relay what is happening in the game.\n" +
-			" We are going to need a lot of strings."; //text message from the game
+	" It will relay what is happening in the game.\n" +
+	" We are going to need a lot of strings."; //text message from the game
 	private ArrayList<Item> inventory; //holds the inventory
 	private String[] items; //array to hold inventory names
 	private JComboBox itemList; //holds the items in a combo box
-	
+
 	//for background image
 	private JLabel background;
 	private Game game; //make a game
-	
+
 	//boolean to disable the button
 	private boolean btnleftClicked = true;
 	private boolean btnrightClicked = true;
 	private boolean btnupClicked = true;
 	private boolean btndownClicked = true;
-	
+
 	public Frame() throws IOException
 	{
-		
+
 		//panel = new JPanel();
 		//text message
 		labelMessage = new JTextArea(message);
 		labelMessage.setPreferredSize(new Dimension(400, 100)); //sizes the textbox
 		labelMessage.setEditable(false);
 		labelMessage.setOpaque(false);
-		
+
 		//get the names of items from the ArrayList
 		//and put them into the item string array
-		
-		
+
+
 		//buttons
 		buttonUp = new JButton("Up");
 		buttonRight = new JButton("Right");
@@ -64,19 +64,19 @@ public class Frame extends JFrame implements ActionListener {
 		buttonUse = new JButton("Use Item");
 		buttonFist = new JButton("Punch");
 		buttonStart = new JButton("New Game");
-		
+
 		//setting a background image
 		//got this here http://java-demos.blogspot.ca/2012/09/setting-background-image-in-jframe.html
 		//setLayout(new BorderLayout());
 		background = new JLabel(new ImageIcon("img/bg.jpg"));
-        
+
 		//set up the panels
 		topPanel = new JPanel();
 		mapPanel = new JPanel();
 		itemPanel = new JPanel();
 		infoPanel = new JPanel();
 		newPanel = new JPanel();
-		
+
 		//set the size and layouts for the panels and background
 		background.setLayout(new BorderLayout(10,10));
 		topPanel.setLayout(new GridLayout(2,1,0,0));
@@ -88,17 +88,17 @@ public class Frame extends JFrame implements ActionListener {
 		itemPanel.setOpaque(false);
 		infoPanel.setOpaque(false);
 		newPanel.setOpaque(false);
-		
-		
-		
-	
+
+
+
+
 		//start a new game
 		game = new Game();
 		hp = game.getPerson().getHP();
 		inventory = game.getInventoryOfPerson();
 		//player hit points
 		labelHP = new JLabel("HP: " + hp);
-		
+
 		//testing adding items to the combobox
 		Item i1 = new Item("Stick", 2, 10);
 		Item i2 = new Item("Health", 4, 10);
@@ -106,18 +106,18 @@ public class Frame extends JFrame implements ActionListener {
 		game.getPerson().addItem(i2);
 		//size the item list appropriately
 		items = new String[inventory.size()];
-		
+
 		//puts the names of the inventory into the combo box
 		for (int i = 0; i<game.getPerson().getInventory().size(); i++)
 		{
 			items[i] = game.getPerson().getInventory().get(i).getName();
 		}
-		
+
 		//populate item list
 		itemList = new JComboBox(items);
 
 		itemList.addActionListener(this);
-		
+
 		//add a combo box to hold items for use
 		//http://da2i.univ-lille1.fr/doc/tutorial-java/uiswing/components/combobox.html
 		itemList.setSelectedIndex(0);
@@ -125,7 +125,7 @@ public class Frame extends JFrame implements ActionListener {
 		itemPanel.add(buttonUse);
 		itemPanel.add(buttonFist);
 		infoPanel.add(labelHP);
-		
+
 		//add all this
 		newPanel.add(buttonStart);
 		newPanel.setPreferredSize(new Dimension(500, 50));
@@ -145,29 +145,29 @@ public class Frame extends JFrame implements ActionListener {
 		//empty label
 		mapPanel.add(new JLabel(" "));
 		mapPanel.add(buttonDown);
-		
-		
+
+
 		background.setSize(500,400);
 		background.add(topPanel);
-		
+
 		//add panels
 		background.add(topPanel, BorderLayout.NORTH);
 		background.add(mapPanel, BorderLayout.CENTER);
 		background.add(itemPanel, BorderLayout.SOUTH);
-		
+
 		add(background);
-		
+
 		//topPanel.setSize(500,200);
 		//mapPanel.setSize(200,150);
 		//itemPanel.setSize(500,50);
-		
+
 		//labelMessage.setForeground(Color.WHITE);
 		setTitle("Text Adventure Game");
 		setSize(500,400);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-		
+
 		//add action listeners
 		buttonUp.addActionListener(this);
 		buttonRight.addActionListener(this);
@@ -176,23 +176,23 @@ public class Frame extends JFrame implements ActionListener {
 		buttonUse.addActionListener(this);
 		buttonStart.addActionListener(this);
 		buttonFist.addActionListener(this);
-		
+
 	}
-	
+
 	public void updateHP()
 	{
 		//get the hp
 		hp = game.getPerson().getHP();
 		labelHP.setText("HP: " + hp);
 		System.out.println("updating the hp to " + hp);
-		
+
 		if(hp<=0) //no hp left
 		{
 			message = "You're dead!"; //print the status in the message
 			labelMessage.setText(message); 
 		}
 	}
-	
+
 	public static void main(String[] args) throws IOException
 	{
 		Frame myWindow = new Frame();
@@ -222,9 +222,9 @@ public class Frame extends JFrame implements ActionListener {
 			message = game.getStatus(); //print the status in the message
 			labelMessage.setText(message);
 			System.out.println("Move Up");
-			
+
 			updateHP();
-			
+
 		}
 		if (e.getSource() == buttonDown) //pressing the down button
 		{
@@ -232,7 +232,7 @@ public class Frame extends JFrame implements ActionListener {
 			message = game.getStatus();
 			labelMessage.setText(message);
 			System.out.println("Move Down");
-			
+
 			updateHP();
 		}
 		if (e.getSource() == buttonRight) //pressing the right button
@@ -241,7 +241,7 @@ public class Frame extends JFrame implements ActionListener {
 			message = game.getStatus();
 			labelMessage.setText(message);
 			System.out.println("Move Right");
-			
+
 			updateHP();
 		}
 		if (e.getSource() == buttonLeft) //pressing the left button
@@ -250,7 +250,7 @@ public class Frame extends JFrame implements ActionListener {
 			message = game.getStatus();
 			labelMessage.setText(message);
 			System.out.println("Move Left");
-			
+
 			updateHP();
 		}
 		if (e.getSource() == buttonUse) //use an item in the list
@@ -265,7 +265,7 @@ public class Frame extends JFrame implements ActionListener {
 			} else {
 				System.out.println("There's no items!");
 			}
-			
+
 			updateHP();
 		}
 		if (e.getSource() == buttonFist) //the punch button
@@ -273,26 +273,27 @@ public class Frame extends JFrame implements ActionListener {
 			//do some punch stuff
 			message = "Punching!";
 			labelMessage.setText(message);
-			
+
 			updateHP();
 		}
-		
+
 	}
-	
+
 	public void disable(){
 		if(game.getPerson().getHP()<=0){
 			if(btnleftClicked == false){
 				buttonLeft.setEnabled(true);
-		}
+			}
 			if(btnrightClicked == false){
 				buttonRight.setEnabled(true);
-		}
+			}
 			if(btnupClicked == false){
 				buttonUp.setEnabled(true);
-		}
+			}
 			if(btndownClicked == false){
 				buttonDown.setEnabled(true);
+			}
+
 		}
-			
 	}
 }
