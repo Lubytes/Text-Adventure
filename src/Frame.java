@@ -22,12 +22,14 @@ public class Frame extends JFrame implements ActionListener {
 	private JButton buttonUse; //Use Item button
 	private JButton buttonFist; //attack without a weapon
 	private JButton buttonStart; //Start button
+	private JButton buttonEscape;
 	private JTextArea labelMessage; //holds game text
 	private JLabel labelHP; //displays the person's hp
 	private int hp = 100;
 	private Tile curr;
 	private Enemy enemy;
 	private boolean isInBattle = false;
+	private boolean escapePressed = false;
 
 	private String message = "This is the space where the game will say messages.\n" +
 			" It will relay what is happening in the game.\n" +
@@ -369,6 +371,7 @@ public class Frame extends JFrame implements ActionListener {
 		if (e.getSource() == buttonEscape) {// the escape button
 		int random = (int)(Math.random()*3); // this generates a number from 0 to 2
 			if (!isInBattle) {   // checks to see if the player is in a battle
+				
 				if (random == 2) {   // if the player is in the battle and if the random number is 2
 			
 				    message = "Fleeing from the enemy!";     // you are able to flee from the enemy.
