@@ -70,7 +70,7 @@ public class Frame extends JFrame implements ActionListener {
 		buttonUse = new JButton("Use Item");
 		buttonFist = new JButton("Punch");
 		buttonStart = new JButton("New Game");
-		buttonFist = new JButton("Escape");
+		buttonEscape = new JButton("Escape");
 
 		//setting a background image
 		//got this here http://java-demos.blogspot.ca/2012/09/setting-background-image-in-jframe.html
@@ -122,7 +122,9 @@ public class Frame extends JFrame implements ActionListener {
 		itemPanel.add(itemList);
 		itemPanel.add(buttonUse);
 		itemPanel.add(buttonFist);
+		itemPanel.add(buttonEscape);
 		infoPanel.add(labelHP);
+		
 
 		//add all this
 		newPanel.add(buttonStart);
@@ -174,6 +176,7 @@ public class Frame extends JFrame implements ActionListener {
 		buttonUse.addActionListener(this);
 		buttonStart.addActionListener(this);
 		buttonFist.addActionListener(this);
+		buttonEscape.addActionListener(this);
 
 	}
 
