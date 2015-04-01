@@ -367,10 +367,18 @@ public class Frame extends JFrame implements ActionListener {
 		}
 		
 		if (e.getSource() == buttonEscape) {// the escape button
+		int random = (int)(Math.random()*3);
 			if (!isInBattle) {
-			     message = "Fleeing from the enemy!";
-			     labelMessage.setText(message);
-			     updateHP();
+				if (random == 2) {
+			
+				    message = "Fleeing from the enemy!";
+			            labelMessage.setText(message);
+			     	    updateHP();
+				}
+				else {
+					message = "You cannot escape!";
+					labelMessage.setText(message);
+				}
 			}
 			else {
 		             message = "There is nothing to flee from!";
