@@ -374,6 +374,7 @@ public class Frame extends JFrame implements ActionListener {
 				    message = "Fleeing from the enemy!";     // you are able to flee from the enemy.
 			            labelMessage.setText(message);
 			     	    updateHP();
+			     	    setEmpty(curr);
 				}
 				else {
 					message = "You cannot escape!";   // otherwise you can't escape
