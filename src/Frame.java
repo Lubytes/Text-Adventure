@@ -376,12 +376,12 @@ public class Frame extends JFrame implements ActionListener {
 			     	    updateHP();
 				}
 				else {
-					message = "You cannot escape!";   // otherwise there is nothing to escape from.
+					message = "You cannot escape!";   // otherwise you can't escape
 					labelMessage.setText(message);
 				}
 			}
 			else {
-		             message = "There is nothing to flee from!";
+		             message = "There is nothing to flee from!"; // there is no battle so you can't escape.
 		             labelMessage.setText(message);
 			}
 			
