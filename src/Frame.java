@@ -187,6 +187,7 @@ public class Frame extends JFrame implements ActionListener {
 		buttonDown.setEnabled(false);
 		buttonLeft.setEnabled(false);
 		buttonRight.setEnabled(false);
+		
 
 		enemy = new Enemy();
 
@@ -195,7 +196,7 @@ public class Frame extends JFrame implements ActionListener {
 
 	public void battleCont(){
 		if(enemy.getHP()>0)
-			game.getPerson().cngHP(enemy.getAttack());
+			game.getPerson().cngHP(enemy.getAttack()); // fixed an error that would increase player's HP by the attack points of enemy.
 
 
 

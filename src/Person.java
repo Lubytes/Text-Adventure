@@ -22,7 +22,7 @@ public class Person {
 	}
 	
 	public void cngHP(int a){
-		hp += a;
+		hp -= a;
 	}
 	
 	public void addPart(){
