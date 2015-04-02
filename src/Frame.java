@@ -101,6 +101,7 @@ public class Frame extends JFrame implements ActionListener {
 
 		//start a new game
 		game = new Game();
+		curr = game.getCurrent(); //curr shouldnt be null
 		hp = game.getPerson().getHP();
 		inventory = game.getInventoryOfPerson();
 		//player hit points
@@ -264,6 +265,7 @@ public class Frame extends JFrame implements ActionListener {
 			//make a game
 			try {
 				game = new Game();
+				curr = game.getCurrent(); //curr shouldnt be null
 				updateHP();
 				message = game.getStatus();
 				labelMessage.setText(message);
