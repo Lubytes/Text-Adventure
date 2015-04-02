@@ -124,7 +124,7 @@ public class Frame extends JFrame implements ActionListener {
 		itemPanel.add(buttonFist);
 		itemPanel.add(buttonEscape);
 		infoPanel.add(labelHP);
-		
+
 
 		//add all this
 		newPanel.add(buttonStart);
@@ -187,7 +187,7 @@ public class Frame extends JFrame implements ActionListener {
 		buttonDown.setEnabled(false);
 		buttonLeft.setEnabled(false);
 		buttonRight.setEnabled(false);
-		
+
 
 		enemy = new Enemy();
 
@@ -345,12 +345,24 @@ public class Frame extends JFrame implements ActionListener {
 				int item = itemList.getSelectedIndex(); //get the selected item
 				String s = itemList.getSelectedItem().toString(); //probably need to change this
 				if(curr.getType().equals("wild_enemy")){
-					enemy.setHP(inventory.get(item).getDamage());
-					battleCont();
+					if(inventory.get(item).getName().equals("Water bottle")){
+						message = "You cannot heal in battle";
+						labelMessage.setText(message);
+					}
+					else{
+						enemy.setHP(inventory.get(item).getDamage());
+						battleCont();
+					}
 				}
-				itemList.removeItemAt(item); //remove the used item
-				inventory.remove(item); //removes the item from inventory arraylist
-				//game.useItem(s); //does whatever Game's useItem() will do
+				if(inventory.get(item).getName().equals("Water bottle")){
+					game.getPerson().cngHP(-5);
+					updateHP();
+				}
+				inventory.get(item).decDur();//decreases durability by 1
+				if(inventory.get(item).getDur() <=0){
+					itemList.removeItemAt(item); //remove the used item
+					inventory.remove(item); //removes the item from inventory arraylist
+				}
 
 			} else {
 				System.out.println("There's no items!");
@@ -371,17 +383,17 @@ public class Frame extends JFrame implements ActionListener {
 			}
 			updateHP();
 		}
-		
+
 		if (e.getSource() == buttonEscape) {// the escape button
-		int random = (int)(Math.random()*3); // this generates a number from 0 to 2
+			int random = (int)(Math.random()*3); // this generates a number from 0 to 2
 			if (!isInBattle) {   // checks to see if the player is in a battle
-				
+
 				if (random == 2) {   // if the player is in the battle and if the random number is 2
-			
-				    message = "Fleeing from the enemy!";     // you are able to flee from the enemy.
-			            labelMessage.setText(message);
-			     	    updateHP();
-			     	    setEmpty(curr);
+
+					message = "Fleeing from the enemy!";     // you are able to flee from the enemy.
+					labelMessage.setText(message);
+					updateHP();
+					setEmpty(curr);
 				}
 				else {
 					message = "You cannot escape!";   // otherwise you can't escape
@@ -389,10 +401,10 @@ public class Frame extends JFrame implements ActionListener {
 				}
 			}
 			else {
-		             message = "There is nothing to flee from!"; // there is no battle so you can't escape.
-		             labelMessage.setText(message);
+				message = "There is nothing to flee from!"; // there is no battle so you can't escape.
+				labelMessage.setText(message);
 			}
-			
+
 		}
 
 	}

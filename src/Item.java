@@ -5,7 +5,7 @@ public class Item {
 	private int damage;
 	private int durability;
 	
-	
+	//Randomly chooses an item to add to inventory
 	public Item(){
 		
 		int a = (int) (Math.random()*5)+1;
@@ -31,7 +31,7 @@ public class Item {
 			durability = 3;
 		  }
 		  else {
-			name = "A bat";
+			name = "Baseball Bat";
 			damage = 10;
 			durability = 2;
 		  }  
@@ -52,10 +52,10 @@ public class Item {
 	}
 	
 	//set methods
-	//When used the durability of an item goes down
+	//When used, the durability of an item goes down
 	//If it reaches 0 it is destroyed
-	public void setDur(int x){
-		durability-=x;
+	public void decDur(){
+		durability--;
 	}
 	
 	
