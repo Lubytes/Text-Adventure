@@ -360,6 +360,8 @@ public class Frame extends JFrame implements ActionListener {
 				}
 				inventory.get(item).decDur();//decreases durability by 1
 				if(inventory.get(item).getDur() <=0){
+					message = (inventory.get(item).getName() + "has broken!");
+					labelMessage.setText(message);
 					itemList.removeItemAt(item); //remove the used item
 					inventory.remove(item); //removes the item from inventory arraylist
 				}
