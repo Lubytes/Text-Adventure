@@ -190,6 +190,11 @@ public class Frame extends JFrame implements ActionListener {
 
 
 		enemy = new Enemy();
+		
+		//some sort of message about the enemy
+		//change to whatever
+		message = "You have encountered a " + enemy.getEnemyType() + "!";
+		labelMessage.setText(message);
 
 
 	}
@@ -211,6 +216,10 @@ public class Frame extends JFrame implements ActionListener {
 			setEmpty(curr);
 			isInBattle = false;
 			//Set the tile so no more battles are here
+			
+			//add to the message
+			message += "\nThe " + enemy.getEnemyType() + " is dead!";
+			labelMessage.setText(message);
 		}
 	}
 
@@ -224,7 +233,16 @@ public class Frame extends JFrame implements ActionListener {
 		if(hp<=0) //no hp left
 		{
 			message = "You're dead!"; //print the status in the message
-			labelMessage.setText(message); 
+			labelMessage.setText(message);
+			
+			//disable all the buttons
+			buttonUp.setEnabled(false);
+			buttonDown.setEnabled(false);
+			buttonLeft.setEnabled(false);
+			buttonRight.setEnabled(false);
+			buttonUse.setEnabled(false);
+			buttonFist.setEnabled(false);
+			
 		}
 	}
 
@@ -269,6 +287,7 @@ public class Frame extends JFrame implements ActionListener {
 				labelMessage.setText(message);
 				//resets the item list
 				inventory.removeAll(inventory); //empty the inventory
+				inventory = game.getInventoryOfPerson();
 				String [] empty = new String[0];
 				itemList.setModel(new DefaultComboBoxModel(empty));
 			} catch (IOException e1) {
@@ -359,6 +378,10 @@ public class Frame extends JFrame implements ActionListener {
 					updateHP();
 				}
 				inventory.get(item).decDur();//decreases durability by 1
+				//some message about the durability
+				message += "\nYou used a " + inventory.get(item).getName() + "! It has " + inventory.get(item).getDur() + " uses left.";
+				labelMessage.setText(message);
+				
 				if(inventory.get(item).getDur() <=0){
 					message = (inventory.get(item).getName() + "has broken!");
 					labelMessage.setText(message);
