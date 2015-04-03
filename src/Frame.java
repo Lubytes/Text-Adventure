@@ -191,6 +191,9 @@ public class Frame extends JFrame implements ActionListener {
 
 
 		enemy = new Enemy();
+		
+		message = "You have encountered a " + enemy.getEnemyType() + "!"; //print the status in the message
+		labelMessage.setText(message);
 
 
 	}
@@ -212,6 +215,10 @@ public class Frame extends JFrame implements ActionListener {
 			setEmpty(curr);
 			isInBattle = false;
 			//Set the tile so no more battles are here
+			
+			//add to the message
+			message += "\nThe " + enemy.getEnemyType() + " is dead!";
+			labelMessage.setText(message);
 		}
 	}
 
@@ -225,7 +232,16 @@ public class Frame extends JFrame implements ActionListener {
 		if(hp<=0) //no hp left
 		{
 			message = "You're dead!"; //print the status in the message
-			labelMessage.setText(message); 
+			labelMessage.setText(message);
+			
+			//disable all the buttons
+			buttonUp.setEnabled(false);
+			buttonDown.setEnabled(false);
+			buttonLeft.setEnabled(false);
+			buttonRight.setEnabled(false);
+			buttonUse.setEnabled(false);
+			buttonFist.setEnabled(false);
+			
 		}
 	}
 
@@ -238,7 +254,7 @@ public class Frame extends JFrame implements ActionListener {
 		items = new String[inventory.size()];
 
 		//give a message
-		message = "You found a " + inventory.get(inventory.size()-1).getName();
+		message = "You found a " + inventory.get(inventory.size()-1).getName() + " with a durability of " + inventory.get(inventory.size()-1).getDur();
 		labelMessage.setText(message);
 
 		//puts the names of the inventory into the combo box
@@ -269,10 +285,13 @@ public class Frame extends JFrame implements ActionListener {
 				updateHP();
 				message = game.getStatus();
 				labelMessage.setText(message);
+				
 				//resets the item list
 				inventory.removeAll(inventory); //empty the inventory
+				inventory = game.getInventoryOfPerson();
 				String [] empty = new String[0];
 				itemList.setModel(new DefaultComboBoxModel(empty));
+				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -338,6 +357,7 @@ public class Frame extends JFrame implements ActionListener {
 			{
 				findItem(); //you found an item!
 			}
+			System.out.println(inventory);
 
 		}
 		if (e.getSource() == buttonUse) //use an item in the list
@@ -354,6 +374,8 @@ public class Frame extends JFrame implements ActionListener {
 					else{
 						enemy.setHP(inventory.get(item).getDamage());
 						battleCont();
+						message = "You used a " + inventory.get(item).getName() + "! It has " + inventory.get(item).getDur() + " uses left.";
+						labelMessage.setText(message);
 					}
 				}
 				if(inventory.get(item).getName().equals("Water bottle")){
