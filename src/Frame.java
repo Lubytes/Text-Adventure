@@ -242,6 +242,7 @@ public class Frame extends JFrame implements ActionListener {
 			buttonRight.setEnabled(false);
 			buttonUse.setEnabled(false);
 			buttonFist.setEnabled(false);
+			buttonEscape.setEnabled(false);
 			
 		}
 	}
@@ -290,6 +291,16 @@ public class Frame extends JFrame implements ActionListener {
 				inventory = game.getInventoryOfPerson();
 				String [] empty = new String[0];
 				itemList.setModel(new DefaultComboBoxModel(empty));
+				
+				//disable all the buttons
+				buttonUp.setEnabled(true);
+				buttonDown.setEnabled(true);
+				buttonLeft.setEnabled(true);
+				buttonRight.setEnabled(true);
+				buttonUse.setEnabled(true);
+				buttonFist.setEnabled(true);
+				buttonEscape.setEnabled(true);
+				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -383,7 +394,7 @@ public class Frame extends JFrame implements ActionListener {
 				labelMessage.setText(message);
 				
 				if(inventory.get(item).getDur() <=0){
-					message = (inventory.get(item).getName() + "has broken!");
+					message = (inventory.get(item).getName() + " has broken!");
 					labelMessage.setText(message);
 					itemList.removeItemAt(item); //remove the used item
 					inventory.remove(item); //removes the item from inventory arraylist
