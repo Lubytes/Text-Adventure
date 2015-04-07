@@ -17,12 +17,12 @@ public class Item {
 		  }
 		  else if(a == 2){
 			name = "Stick";
-			damage = 2;
+			damage = 4;
 			durability = 4;
 		  }
 		  else if(a == 3){
 			name = "Rock";
-			damage = 4;
+			damage = 6;
 			durability = 4;
 		  }
 		  else if(a == 4){

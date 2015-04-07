@@ -33,9 +33,9 @@ public class Frame extends JFrame implements ActionListener {
 	private boolean isInBattle = false;
 	private boolean escapePressed = false;
 
-	private String message = "This is the space where the game will say messages.\n" +
-			" It will relay what is happening in the game.\n" +
-			" We are going to need a lot of strings."; //text message from the game
+	private String message = "You wake up slightly bloody.\n" +
+			" You soon realize you were in a plane crash.\n" +
+			" Where is everyone? Are you the only survivor? Maybe it's best to explore."; //text message from the game
 	private ArrayList<Item> inventory; //holds the inventory
 	private String[] items; //array to hold inventory names
 	private JComboBox itemList; //holds the items in a combo box
@@ -219,7 +219,6 @@ public class Frame extends JFrame implements ActionListener {
 			buttonLeft.setEnabled(true);
 			buttonRight.setEnabled(true);
 			setEmpty(curr);
-			isInBattle = false;
 			//Set the tile so no more battles are here
 			
 			//add to the message
@@ -513,19 +512,25 @@ public class Frame extends JFrame implements ActionListener {
 		}
 
 		if (e.getSource() == buttonEscape) {// the escape button
-			int random = (int)(Math.random()*3); // this generates a number from 0 to 2
-			if (!isInBattle) {   // checks to see if the player is in a battle
-
+			
+			if (curr.getType().equals("wild_enemy")) {   // checks to see if the player is in a battle
+				int random = (int)(Math.random()*3); // this generates a number from 0 to 2
 				if (random == 2) {   // if the player is in the battle and if the random number is 2
 
 					message = "Fleeing from the enemy!";     // you are able to flee from the enemy.
 					labelMessage.setText(message);
 					updateHP();
 					setEmpty(curr);
+					buttonUp.setEnabled(true);
+					buttonDown.setEnabled(true);
+					buttonLeft.setEnabled(true);
+					buttonRight.setEnabled(true);
+					
 				}
 				else {
 					message = "You cannot escape!";   // otherwise you can't escape
 					labelMessage.setText(message);
+					buttonEscape.setEnabled(false);
 				}
 			}
 			else {
