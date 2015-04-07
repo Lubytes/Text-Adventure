@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 public class Frame extends JFrame implements ActionListener {
 
 	//private JPanel panel; //the panel to hold stuff
@@ -56,7 +57,7 @@ public class Frame extends JFrame implements ActionListener {
 		//panel = new JPanel();
 		//text message
 		labelMessage = new JTextArea(message);
-		labelMessage.setPreferredSize(new Dimension(400, 100)); //sizes the textbox
+		labelMessage.setPreferredSize(new Dimension(460, 100)); //sizes the textbox
 		labelMessage.setEditable(false);
 		labelMessage.setOpaque(false);
 
@@ -287,6 +288,17 @@ public class Frame extends JFrame implements ActionListener {
 		itemList.setModel(new DefaultComboBoxModel(items));
 		setEmpty(curr);
 	}
+	
+	//message updating for empty tiles
+	public void emptyMessage()
+	{
+		//mix it up with some random messages
+		String[] messages = {"There's some tall grass. Keep going.", "Keep moving.", "Nothing here, keep looking."};
+		Random rand = new Random();
+		int randomNum = rand.nextInt(messages.length);
+		message = messages[randomNum];
+		labelMessage.setText(message);
+	}
 
 	public static void main(String[] args) throws IOException
 	{
@@ -304,8 +316,6 @@ public class Frame extends JFrame implements ActionListener {
 				partNum = 0; //reset the number of parts
 				labelPart.setText("Parts: " + partNum);
 				updateHP();
-				message = game.getStatus();
-				labelMessage.setText(message);
 				//resets the item list
 				inventory.removeAll(inventory); //empty the inventory
 				inventory = game.getInventoryOfPerson();
@@ -329,8 +339,7 @@ public class Frame extends JFrame implements ActionListener {
 		if (e.getSource() == buttonUp) //pressing the up button
 		{
 			game.moveUp(); //move up on the map
-			message = game.getStatus(); //print the status in the message
-			labelMessage.setText(message);
+			emptyMessage();//status messages for empty tiles
 			System.out.println("Move Up");
 			curr = game.getCurrent();
 			if(curr.getType().equals("wild_enemy"))
@@ -363,8 +372,7 @@ public class Frame extends JFrame implements ActionListener {
 		if (e.getSource() == buttonDown) //pressing the down button
 		{
 			game.moveDown(); //move down on the map
-			message = game.getStatus();
-			labelMessage.setText(message);
+			emptyMessage();//status messages for empty tiles
 			System.out.println("Move Down");
 			curr = game.getCurrent();
 			if(curr.getType().equals("wild_enemy"))
@@ -396,8 +404,7 @@ public class Frame extends JFrame implements ActionListener {
 		if (e.getSource() == buttonRight) //pressing the right button
 		{
 			game.moveRight();
-			message = game.getStatus();
-			labelMessage.setText(message);
+			emptyMessage();//status messages for empty tiles
 			System.out.println("Move Right");
 			curr = game.getCurrent();
 			if(curr.getType().equals("wild_enemy"))
@@ -429,8 +436,7 @@ public class Frame extends JFrame implements ActionListener {
 		if (e.getSource() == buttonLeft) //pressing the left button
 		{
 			game.moveLeft();
-			message = game.getStatus();
-			labelMessage.setText(message);
+			emptyMessage();//status messages for empty tiles
 			System.out.println("Move Left");
 			curr = game.getCurrent();
 			if(curr.getType().equals("wild_enemy"))
