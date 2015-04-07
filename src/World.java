@@ -16,8 +16,12 @@ public class World {
 	//default constructor
 	public World()
 	{
-		//change this to randomize
-		fileName = "maps/map01.csv";
+		//pick a random file from the file choices
+		String[] files = {"maps/map01.csv", "maps/map02.csv"};
+		Random rand = new Random();
+		int randomNum = rand.nextInt(files.length);
+		fileName = files[randomNum];
+		//fileName = "maps/map01.csv";
 	}
 	
 	//constructor to pass a filename
