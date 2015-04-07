@@ -262,7 +262,11 @@ public class Frame extends JFrame implements ActionListener {
 			game.getPerson().addPart(); //adding this part to the person
 			labelPart.setText("Parts: " + partNum);
 			setEmpty(curr); //delete the part
-			//do some other stuff probably?
+			message = "You found a radio part!"; //print the status in the message
+			if(game.getPerson().allParts())
+				message+="\nYou combined the parts and made a radio!";
+			labelMessage.setText(message);
+			
 		}
 	}
 
