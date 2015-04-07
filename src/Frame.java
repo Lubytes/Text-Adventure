@@ -3,11 +3,15 @@
  */
 import javax.swing.*;
 
+import java.applet.*;
+import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.Random;
+
 public class Frame extends JFrame implements ActionListener {
 
 	//private JPanel panel; //the panel to hold stuff
@@ -33,6 +37,8 @@ public class Frame extends JFrame implements ActionListener {
 	private Enemy enemy;
 	private boolean isInBattle = false;
 	private boolean escapePressed = false;
+	private AudioClip audio;
+	
 
 	private String message = "You wake up slightly bloody.\n" +
 			" You soon realize you were in a plane crash.\n" +
@@ -184,6 +190,16 @@ public class Frame extends JFrame implements ActionListener {
 		buttonFist.addActionListener(this);
 		buttonEscape.addActionListener(this);
 
+		try{
+		audio = Applet.newAudioClip(new URL("file:Mind_Heist.wav"));		
+		}
+		catch(MalformedURLException e){
+			System.out.println("error");
+			e.printStackTrace();
+		}
+		
+		audio.play();
+		audio.loop();
 	}
 
 	public void battleStart(){
@@ -356,6 +372,7 @@ public class Frame extends JFrame implements ActionListener {
 				buttonUse.setEnabled(true);
 				buttonFist.setEnabled(true);
 				buttonEscape.setEnabled(true);
+				
 				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block

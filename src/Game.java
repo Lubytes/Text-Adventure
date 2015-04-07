@@ -1,4 +1,6 @@
+
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -27,6 +29,7 @@ public class Game {
 		xPos = world.getStartCol();
 		
 		current = world.getTile(yPos, xPos);
+		
 	}
 	
 	//set and get status messages
