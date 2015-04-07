@@ -26,6 +26,8 @@ public class Frame extends JFrame implements ActionListener {
 	private JTextArea labelMessage; //holds game text
 	private JLabel labelHP; //displays the person's hp
 	private int hp = 100;
+	private JLabel labelPart; //displays number of parts collected
+	private int partNum = 0; //holds the number of parts
 	private Tile curr;
 	private Enemy enemy;
 	private boolean isInBattle = false;
@@ -105,6 +107,7 @@ public class Frame extends JFrame implements ActionListener {
 		inventory = game.getInventoryOfPerson();
 		//player hit points
 		labelHP = new JLabel("HP: " + hp);
+		labelPart = new JLabel("Parts: " + partNum);
 
 
 		//size the item list appropriately
@@ -124,6 +127,8 @@ public class Frame extends JFrame implements ActionListener {
 		itemPanel.add(buttonFist);
 		itemPanel.add(buttonEscape);
 		infoPanel.add(labelHP);
+		infoPanel.add(new JLabel("\t\t\t\t")); //make some space
+		infoPanel.add(labelPart);
 
 
 		//add all this
@@ -246,6 +251,19 @@ public class Frame extends JFrame implements ActionListener {
 			
 		}
 	}
+	
+	//update part
+	public void updatePart()
+	{
+		if (curr.getType().equals("part")) //if on a part tile
+		{
+			//get the part
+			partNum++; //change this
+			labelPart.setText("Parts: " + partNum);
+			setEmpty(curr); //delete the part
+			//do some other stuff probably?
+		}
+	}
 
 	//find an item
 	public void findItem()
@@ -283,6 +301,8 @@ public class Frame extends JFrame implements ActionListener {
 			//make a game
 			try {
 				game = new Game();
+				partNum = 0; //reset the number of parts
+				labelPart.setText("Parts: " + partNum);
 				updateHP();
 				message = game.getStatus();
 				labelMessage.setText(message);
@@ -316,6 +336,7 @@ public class Frame extends JFrame implements ActionListener {
 			if(curr.getType().equals("wild_enemy"))
 				battleStart();
 			updateHP();
+			updatePart();
 			if(curr.getType().equals("item")) //is it an item tile?
 			{
 				findItem(); //you found an item!
@@ -332,6 +353,7 @@ public class Frame extends JFrame implements ActionListener {
 			if(curr.getType().equals("wild_enemy"))
 				battleStart();
 			updateHP();
+			updatePart();
 			if(curr.getType().equals("item")) //is it an item tile?
 			{
 				findItem(); //you found an item!
@@ -347,6 +369,7 @@ public class Frame extends JFrame implements ActionListener {
 			if(curr.getType().equals("wild_enemy"))
 				battleStart();
 			updateHP();
+			updatePart();
 			if(curr.getType().equals("item")) //is it an item tile?
 			{
 				findItem(); //you found an item!
@@ -362,6 +385,7 @@ public class Frame extends JFrame implements ActionListener {
 			if(curr.getType().equals("wild_enemy"))
 				battleStart();
 			updateHP();
+			updatePart();
 			if(curr.getType().equals("item")) //is it an item tile?
 			{
 				findItem(); //you found an item!
