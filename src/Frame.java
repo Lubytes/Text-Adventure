@@ -120,14 +120,15 @@ public class Frame extends JFrame implements ActionListener {
 		//size the item list appropriately
 		items = new String[inventory.size()];
 
+		//add a combo box to hold items for use
+		//http://da2i.univ-lille1.fr/doc/tutorial-java/uiswing/components/combobox.html
+
 		//populate item list
 		itemList = new JComboBox(items);
 
 		itemList.addActionListener(this);
 
-		//add a combo box to hold items for use
-		//http://da2i.univ-lille1.fr/doc/tutorial-java/uiswing/components/combobox.html
-
+		
 		//itemList.setSelectedIndex(0);
 		itemPanel.add(itemList);
 		itemPanel.add(buttonUse);
@@ -160,7 +161,7 @@ public class Frame extends JFrame implements ActionListener {
 
 
 		background.setSize(500,400);
-		background.add(topPanel);
+		//background.add(topPanel);
 
 		//add panels
 		background.add(topPanel, BorderLayout.NORTH);
