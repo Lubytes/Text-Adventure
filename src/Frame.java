@@ -296,11 +296,7 @@ public class Frame extends JFrame implements ActionListener {
 	//message updating for empty tiles
 	public void emptyMessage()
 	{
-		//mix it up with some random messages
-		String[] messages = {"There's some tall grass. Keep going.", "Keep moving.", "Nothing here, keep looking."};
-		Random rand = new Random();
-		int randomNum = rand.nextInt(messages.length);
-		message = messages[randomNum];
+		message = game.getStatus();
 		labelMessage.setText(message);
 	}
 
@@ -318,6 +314,10 @@ public class Frame extends JFrame implements ActionListener {
 			try {
 				game = new Game();
 				partNum = 0; //reset the number of parts
+				message = "You wake up slightly bloody.\n" +
+				" You soon realize you were in a plane crash.\n" +
+				" Where is everyone? Are you the only survivor? Maybe it's best to explore."; //text message from the game
+				labelMessage.setText(message);
 				labelPart.setText("Parts: " + partNum);
 				updateHP();
 				//resets the item list

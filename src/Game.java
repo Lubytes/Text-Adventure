@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /*
  * This is the actual game.
@@ -73,6 +74,15 @@ public class Game {
 		}
 	}
 	
+	public void isEmpty()
+	{
+		//mix it up with some random messages
+		String[] messages = {"There's some tall grass. Keep going.", "Keep moving.", "Nothing here, keep looking."};
+		Random rand = new Random();
+		int randomNum = rand.nextInt(messages.length);
+		status = messages[randomNum];
+	}
+	
 	//move in the world
 	public void moveUp()
 	{
@@ -80,7 +90,7 @@ public class Game {
 		{
 			yPos--;
 			current = world.getTile(yPos, xPos); //sets the position
-			status = current.getType(); //delete this
+			isEmpty();
 			System.out.println(xPos + ", " + yPos); //prints pos
 			
 			
@@ -97,7 +107,7 @@ public class Game {
 		{
 			yPos++;
 			current = world.getTile(yPos, xPos); //sets the position
-			status = current.getType(); //delete this
+			isEmpty();
 			System.out.println(xPos + ", " + yPos); //prints pos
 			
 			
@@ -113,7 +123,7 @@ public class Game {
 		{
 			xPos++;
 			current = world.getTile(yPos, xPos); //sets the position
-			status = current.getType(); //delete this
+			isEmpty();
 			System.out.println(xPos + ", " + yPos); //prints pos
 			
 			
@@ -129,7 +139,7 @@ public class Game {
 		{
 			xPos--;
 			current = world.getTile(yPos, xPos); //sets the position
-			status = current.getType(); //delete this
+			isEmpty();
 			System.out.println(xPos + ", " + yPos); //prints pos
 			
 			
