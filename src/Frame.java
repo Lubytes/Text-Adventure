@@ -232,7 +232,7 @@ public class Frame extends JFrame implements ActionListener {
 
 		if(hp<=0) //no hp left
 		{
-			message = "You're dead!"; //print the status in the message
+			message = "You're dead!\nPlease play again"; //print the status in the message
 			labelMessage.setText(message);
 			
 			//disable all the buttons
@@ -320,6 +320,23 @@ public class Frame extends JFrame implements ActionListener {
 			{
 				findItem(); //you found an item!
 			}
+			if(curr.getType().equals("finish")){
+				if(game.getPerson().allParts()){
+					message = "You brought the radio! We're saved!\nFin";
+					labelMessage.setText(message);
+					buttonUp.setEnabled(false);
+					buttonDown.setEnabled(false);
+					buttonLeft.setEnabled(false);
+					buttonRight.setEnabled(false);
+					buttonUse.setEnabled(false);
+					buttonFist.setEnabled(false);
+					buttonEscape.setEnabled(false);
+				}
+				else{
+					message = "Oh hi there. We're stranded as well.\nIf only we had some sort of communication device";
+					labelMessage.setText(message);
+				}
+			}
 
 		}
 		if (e.getSource() == buttonDown) //pressing the down button
@@ -336,6 +353,23 @@ public class Frame extends JFrame implements ActionListener {
 			{
 				findItem(); //you found an item!
 			}
+			if(curr.getType().equals("finish")){
+				if(game.getPerson().allParts()){
+					message = "You brought the radio! We're saved!\nFin";
+					labelMessage.setText(message);
+					buttonUp.setEnabled(false);
+					buttonDown.setEnabled(false);
+					buttonLeft.setEnabled(false);
+					buttonRight.setEnabled(false);
+					buttonUse.setEnabled(false);
+					buttonFist.setEnabled(false);
+					buttonEscape.setEnabled(false);
+				}
+				else{
+					message = "Oh hi there. We're stranded as well.\nIf only we had some sort of communication device";
+					labelMessage.setText(message);
+				}
+			}
 		}
 		if (e.getSource() == buttonRight) //pressing the right button
 		{
@@ -351,6 +385,23 @@ public class Frame extends JFrame implements ActionListener {
 			{
 				findItem(); //you found an item!
 			}
+			if(curr.getType().equals("finish")){
+				if(game.getPerson().allParts()){
+					message = "You brought the radio! We're saved!\nFin";
+					labelMessage.setText(message);
+					buttonUp.setEnabled(false);
+					buttonDown.setEnabled(false);
+					buttonLeft.setEnabled(false);
+					buttonRight.setEnabled(false);
+					buttonUse.setEnabled(false);
+					buttonFist.setEnabled(false);
+					buttonEscape.setEnabled(false);
+				}
+				else{
+					message = "Oh hi there. We're stranded as well.\nIf only we had some sort of communication device";
+					labelMessage.setText(message);
+				}
+			}
 		}
 		if (e.getSource() == buttonLeft) //pressing the left button
 		{
@@ -365,6 +416,23 @@ public class Frame extends JFrame implements ActionListener {
 			if(curr.getType().equals("item")) //is it an item tile?
 			{
 				findItem(); //you found an item!
+			}
+			if(curr.getType().equals("finish")){
+				if(game.getPerson().allParts()){
+					message = "You brought the radio! We're saved!\nFin";
+					labelMessage.setText(message);
+					buttonUp.setEnabled(false);
+					buttonDown.setEnabled(false);
+					buttonLeft.setEnabled(false);
+					buttonRight.setEnabled(false);
+					buttonUse.setEnabled(false);
+					buttonFist.setEnabled(false);
+					buttonEscape.setEnabled(false);
+				}
+				else{
+					message = "Oh hi there. We're stranded as well.\nIf only we had some sort of communication device";
+					labelMessage.setText(message);
+				}
 			}
 
 		}
