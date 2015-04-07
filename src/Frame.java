@@ -259,6 +259,7 @@ public class Frame extends JFrame implements ActionListener {
 		{
 			//get the part
 			partNum++; //change this
+			game.getPerson().addPart(); //adding this part to the person
 			labelPart.setText("Parts: " + partNum);
 			setEmpty(curr); //delete the part
 			//do some other stuff probably?
