@@ -236,6 +236,7 @@ public class Frame extends JFrame implements ActionListener {
 			buttonDown.setEnabled(true);
 			buttonLeft.setEnabled(true);
 			buttonRight.setEnabled(true);
+			buttonEscape.setEnabled(true);
 			setEmpty(curr);
 			//Set the tile so no more battles are here
 			
